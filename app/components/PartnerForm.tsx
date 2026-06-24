@@ -74,6 +74,7 @@ export default function PartnerForm() {
   }));
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [statusMessage, setStatusMessage] = useState<string>("");
   const shouldReduceMotion = useReducedMotion();
 
   // Sync model selection with the URL hash (for "Choose referral/co-selling" CTAs)
@@ -141,8 +142,14 @@ export default function PartnerForm() {
     if (result.success) {
       setStatus("success");
       setFormData(initialData);
+      setStatusMessage("");
     } else {
       setStatus("error");
+      setStatusMessage(
+        result.error?.includes("not configured")
+          ? "Email service is not configured. Please contact the site administrator."
+          : result.error ?? "Something went wrong. Please try again or email us directly at hello@phaneos.cloud."
+      );
     }
   };
 
@@ -392,8 +399,8 @@ export default function PartnerForm() {
                 <div className="mt-6 rounded-lg bg-[var(--color-error)]/10 border border-[var(--color-error)]/20 p-4 flex items-start gap-3">
                   <AlertCircle className="text-[var(--color-error)] shrink-0 mt-0.5" size={20} />
                   <div>
-                    <p className="font-medium text-[var(--color-ink)]">Something went wrong.</p>
-                    <p className="text-sm text-[var(--color-muted)]">Please try again or email us directly at hello@phaneos.cloud.</p>
+                    <p className="font-medium text-[var(--color-ink)]">{statusMessage.includes("not configured") ? "Service not ready" : "Something went wrong."}</p>
+                    <p className="text-sm text-[var(--color-muted)]">{statusMessage}</p>
                   </div>
                 </div>
               )}
