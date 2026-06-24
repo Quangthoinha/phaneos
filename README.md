@@ -30,13 +30,28 @@ npx playwright test # E2E on Desktop + Mobile Chrome
 
 ## Partner form backend
 
-Partner registrations are submitted through a server action (`app/actions/partner.ts`) that sends email via [Resend](https://resend.com).
+Partner registrations are submitted through a server action (`app/actions/partner.ts`) that:
+
+1. Sends an email notification via [Resend](https://resend.com).
+2. Appends a row to the [partner registrations Google Sheet](https://docs.google.com/spreadsheets/d/1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk/edit?usp=sharing).
+
+### Resend setup
 
 1. Copy `.env.example` to `.env.local`.
 2. Add your `RESEND_API_KEY`.
 3. Optionally override `PARTNER_INBOX_EMAIL` and `FROM_EMAIL`.
 
-In development without a Resend key, the server action logs the payload to the console and returns success so the UI flow can still be tested. In production, a missing key returns a real error.
+### Google Sheets setup
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/) and create a **Service Account**.
+2. Enable the **Google Sheets API** for your project.
+3. Create a JSON key for the service account and note:
+   - `client_email` → set as `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+   - `private_key` → set as `GOOGLE_PRIVATE_KEY` (paste the full key including `-----BEGIN...-----`)
+4. Open the [registrations spreadsheet](https://docs.google.com/spreadsheets/d/1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk/edit?usp=sharing), click **Share**, and invite the service account email with **Editor** access.
+5. Make sure the sheet contains a tab named `Registrations` (or set `GOOGLE_SHEET_NAME` to a custom name).
+
+In development without a Resend key, the server action logs the payload to the console and returns success so the UI flow can still be tested. In production, a missing Resend key returns a real error. The Google Sheets log is best-effort: a failed sheet append is logged but does not block the form submission.
 
 ## Environment variables
 
@@ -45,6 +60,10 @@ In development without a Resend key, the server action logs the payload to the c
 | `RESEND_API_KEY` | — | Resend API key for sending registration emails |
 | `PARTNER_INBOX_EMAIL` | `partner@phaneosai.com` | Inbox that receives partner registrations |
 | `FROM_EMAIL` | `onboarding@phaneosai.com` | Verified sender domain in Resend |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | — | Service account `client_email` for Google Sheets API |
+| `GOOGLE_PRIVATE_KEY` | — | Service account `private_key` for Google Sheets API |
+| `GOOGLE_SHEET_ID` | `1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk` | Target spreadsheet ID |
+| `GOOGLE_SHEET_NAME` | `Registrations` | Sheet tab name |
 
 ## SEO & accessibility
 
