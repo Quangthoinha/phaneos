@@ -93,14 +93,22 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     <p><strong>Message:</strong><br/>${escapeHtml(message || "—").replace(/\n/g, "<br/>")}</p>
   `;
 
-  // In development without a Resend key, log the payload and return success
-  // so the UI can still be tested. In production, a missing key is a real error.
+  // Always attempt to log to Google Sheets first so registrations are captured
+  // even if the email service is not configured or fails.
+  const sheetResult = await appendToSheet(data);
+
   let emailResult: { success: boolean; error?: string } = { success: true };
   if (!resendApiKey) {
-    if (process.env.NODE_ENV === "production") {
-      return { success: false, error: "Email service is not configured" };
+    // In development without a Resend key, log the payload to the console.
+    // In production without a Resend key, still accept the registration if it
+    // was saved to the sheet, but warn that email notifications are not active.
+    if (process.env.NODE_ENV === "development") {
+      console.log("[DEV] Partner registration would be sent:", { toEmail, subject, html });
+    } else if (!sheetResult.success) {
+      return { success: false, error: "Email service is not configured and sheet log failed." };
+    } else {
+      emailResult = { success: false, error: "Email service is not configured" };
     }
-    console.log("[DEV] Partner registration would be sent:", { toEmail, subject, html });
   } else {
     try {
       const resend = new Resend(resendApiKey);
@@ -121,15 +129,20 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     }
   }
 
-  // Always attempt to log to Google Sheets, but do not block success on sheet failure
-  const sheetResult = await appendToSheet(data);
-
+  // If the email was not sent but the sheet write succeeded, still return
+  // success so the user gets confirmation, with a warning for the admin.
   if (!emailResult.success) {
+    if (sheetResult.success && !sheetResult.skipped) {
+      return {
+        success: true,
+        warning: "Registration saved, but email notification is not configured yet. Please set RESEND_API_KEY.",
+      };
+    }
     return { success: false, error: emailResult.error };
   }
 
   if (!sheetResult.success) {
-    console.warn("Partner registration saved but sheet log failed:", sheetResult.error);
+    console.warn("Partner registration email sent but sheet log failed:", sheetResult.error);
   }
 
   return { success: true };

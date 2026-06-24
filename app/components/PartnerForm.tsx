@@ -142,13 +142,11 @@ export default function PartnerForm() {
     if (result.success) {
       setStatus("success");
       setFormData(initialData);
-      setStatusMessage("");
+      setStatusMessage(result.warning ?? "");
     } else {
       setStatus("error");
       setStatusMessage(
-        result.error?.includes("not configured")
-          ? "Email service is not configured. Please contact the site administrator."
-          : result.error ?? "Something went wrong. Please try again or email us directly at hello@phaneos.cloud."
+        result.error ?? "Something went wrong. Please try again or email us directly at hello@phaneos.cloud."
       );
     }
   };
@@ -386,11 +384,19 @@ export default function PartnerForm() {
               </div>
 
               {status === "success" && (
-                <div className="mt-6 rounded-lg bg-[var(--color-success)]/10 border border-[var(--color-success)]/20 p-4 flex items-start gap-3">
-                  <CheckCircle2 className="text-[var(--color-success)] shrink-0 mt-0.5" size={20} />
+                <div className={`mt-6 rounded-lg p-4 flex items-start gap-3 ${
+                  statusMessage
+                    ? "bg-[var(--color-warning)]/10 border border-[var(--color-warning)]/20"
+                    : "bg-[var(--color-success)]/10 border border-[var(--color-success)]/20"
+                }`}>
+                  <CheckCircle2 className={`shrink-0 mt-0.5 ${statusMessage ? "text-[var(--color-warning)]" : "text-[var(--color-success)]"}`} size={20} />
                   <div>
-                    <p className="font-medium text-[var(--color-ink)]">Registration sent.</p>
-                    <p className="text-sm text-[var(--color-muted)]">We will reply within 24 hours with partner docs and proposed meeting times.</p>
+                    <p className="font-medium text-[var(--color-ink)]">Registration received.</p>
+                    <p className="text-sm text-[var(--color-muted)]">
+                      {statusMessage
+                        ? statusMessage
+                        : "We will reply within 24 hours with partner docs and proposed meeting times."}
+                    </p>
                   </div>
                 </div>
               )}
