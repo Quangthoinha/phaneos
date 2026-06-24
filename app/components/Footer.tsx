@@ -56,16 +56,16 @@ export default function Footer() {
 
           <div className="flex flex-col md:items-end gap-4">
             <motion.a
-              href="mailto:partner@phaneosai.com"
+              href="mailto:hello@phaneos.cloud"
               className="inline-flex items-center gap-2 text-base text-white/80 hover:text-[var(--color-primary)] transition-colors"
               whileHover={{ x: 2 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Mail size={18} />
-              partner@phaneosai.com
+              hello@phaneos.cloud
             </motion.a>
             <motion.a
-              href="https://linkedin.com/company/phaneosai"
+              href="https://www.linkedin.com/in/phaneos-ai-undefined-b50bb4416/?skipRedirect=true"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-base text-white/80 hover:text-[var(--color-primary)] transition-colors"

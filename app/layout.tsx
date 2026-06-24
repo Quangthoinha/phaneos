@@ -16,8 +16,8 @@ const structuredData = {
   url: "https://phaneosai.com",
   description:
     "AI integration partner for agencies. Referral 12%. Co-selling 25%. Agencies keep the client relationship; phaneosAI delivers the AI expertise.",
-  email: "partner@phaneosai.com",
-  sameAs: ["https://linkedin.com/company/phaneosai"],
+  email: "hello@phaneos.cloud",
+  sameAs: ["https://www.linkedin.com/in/phaneos-ai-undefined-b50bb4416/?skipRedirect=true"],
 };
 
 export const metadata: Metadata = {

@@ -379,7 +379,7 @@ export default function PartnerForm() {
                   <AlertCircle className="text-[var(--color-error)] shrink-0 mt-0.5" size={20} />
                   <div>
                     <p className="font-medium text-[var(--color-ink)]">Something went wrong.</p>
-                    <p className="text-sm text-[var(--color-muted)]">Please try again or email us directly at partner@phaneosai.com.</p>
+                    <p className="text-sm text-[var(--color-muted)]">Please try again or email us directly at hello@phaneos.cloud.</p>
                   </div>
                 </div>
               )}
