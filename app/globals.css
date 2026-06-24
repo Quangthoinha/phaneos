@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: oklch(1.00 0.000 0);
+  --color-surface: oklch(0.97 0.002 13.5);
+  --color-ink: oklch(0.12 0.005 13.5);
+  --color-muted: oklch(0.40 0.005 13.5);
+  --color-primary: oklch(0.55 0.180 13.5);
+  --color-primary-hover: oklch(0.48 0.160 13.5);
+  --color-primary-subtle: oklch(0.94 0.020 13.5);
+  --color-accent: oklch(0.25 0.020 50);
+  --color-accent-light: oklch(0.85 0.025 80);
+  --color-success: oklch(0.55 0.160 145);
+  --color-warning: oklch(0.70 0.140 85);
+  --color-error: oklch(0.55 0.180 25);
+  --color-shadow: oklch(0.50 0.000 0 / 0.08);
+
+  --font-sans: var(--font-manrope);
+
+  --text-xs: clamp(0.75rem, 0.8vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.9vw, 1rem);
+  --text-base: clamp(1rem, 1vw, 1.125rem);
+  --text-md: clamp(1.125rem, 1.25vw, 1.375rem);
+  --text-lg: clamp(1.5rem, 2vw, 2.25rem);
+  --text-xl: clamp(2rem, 3vw, 3.5rem);
+  --text-2xl: clamp(2.5rem, 4.5vw, 5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  --header-height: clamp(3.5rem, 5.5vh, 5rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: var(--color-bg);
+  --foreground: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+  scroll-snap-type: y proximity;
+}
+
+/* Full-viewport snap sections */
+.snap-section {
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* Sections that need more breathing room can opt out of strict snapping */
+.snap-section--relaxed {
+  scroll-snap-align: none;
+}
+
+/* Fluid, non-fixed content containers */
+.container-wide {
+  width: 100%;
+  max-width: min(92vw, 1600px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 4vw, 3rem);
+  padding-right: clamp(1.25rem, 4vw, 3rem);
+}
+
+.heading-section {
+  font-size: clamp(1.75rem, 2.4vw, 2.75rem);
+}
+
+.text-section {
+  font-size: clamp(1rem, 1vw, 1.125rem);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+.hero-section {
+  padding-top: var(--header-height);
+}
+
+/* Typography utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Animation utilities */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Focus rings */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
