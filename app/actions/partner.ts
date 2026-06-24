@@ -1,6 +1,5 @@
 "use server";
 
-import { Resend } from "resend";
 import { google } from "googleapis";
 
 export interface PartnerRegistrationData {
@@ -13,7 +12,7 @@ export interface PartnerRegistrationData {
   timeToMeet?: string;
 }
 
-const resendApiKey = process.env.RESEND_API_KEY;
+const brevoApiKey = process.env.BREVO_API_KEY;
 const toEmail = process.env.PARTNER_INBOX_EMAIL ?? "partner@phaneosai.com";
 const fromEmail = process.env.FROM_EMAIL ?? "onboarding@phaneosai.com";
 
@@ -85,8 +84,8 @@ async function appendToSheet(data: PartnerRegistrationData) {
     );
 
     // Locate the preferred meeting time column.
-    const timeToMeetIndex = headerLabels.findIndex((label) =>
-      label.includes("time to meet") || label.includes("meet")
+    const timeToMeetIndex = headerLabels.findIndex(
+      (label) => label.includes("time to meet") || label.includes("meet")
     );
 
     const baseRow = [
@@ -172,9 +171,9 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
   const sheetResult = await appendToSheet(data);
 
   let emailResult: { success: boolean; error?: string } = { success: true };
-  if (!resendApiKey) {
-    // In development without a Resend key, log the payload to the console.
-    // In production without a Resend key, still accept the registration if it
+  if (!brevoApiKey) {
+    // In development without a Brevo key, log the payload to the console.
+    // In production without a Brevo key, still accept the registration if it
     // was saved to the sheet, but warn that email notifications are not active.
     if (process.env.NODE_ENV === "development") {
       console.log("[DEV] Partner registration would be sent:", { toEmail, subject, html });
@@ -185,16 +184,25 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     }
   } else {
     try {
-      const resend = new Resend(resendApiKey);
-      const result = await resend.emails.send({
-        from: `phaneosAI <${fromEmail}>`,
-        to: [toEmail],
-        replyTo: email.trim(),
-        subject,
-        html,
+      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "api-key": brevoApiKey,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: { name: "phaneosAI", email: fromEmail },
+          to: [{ email: toEmail }],
+          replyTo: { email: email.trim() },
+          subject,
+          htmlContent: html,
+        }),
       });
 
-      if (result.error) {
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error("Brevo email failed:", response.status, errorBody);
         emailResult = { success: false, error: "Failed to send registration. Please try again." };
       }
     } catch (error) {
@@ -209,7 +217,7 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     if (sheetResult.success && !sheetResult.skipped) {
       return {
         success: true,
-        warning: "Registration saved, but email notification is not configured yet. Please set RESEND_API_KEY.",
+        warning: "Registration saved, but email notification is not configured yet. Please set BREVO_API_KEY.",
       };
     }
     return { success: false, error: emailResult.error };

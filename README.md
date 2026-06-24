@@ -32,14 +32,15 @@ npx playwright test # E2E on Desktop + Mobile Chrome
 
 Partner registrations are submitted through a server action (`app/actions/partner.ts`) that:
 
-1. Sends an email notification via [Resend](https://resend.com).
+1. Sends an email notification via [Brevo](https://www.brevo.com/).
 2. Appends a row to the [partner registrations Google Sheet](https://docs.google.com/spreadsheets/d/1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk/edit?usp=sharing).
 
-### Resend setup
+### Brevo setup
 
-1. Copy `.env.example` to `.env.local`.
-2. Add your `RESEND_API_KEY`.
-3. Optionally override `PARTNER_INBOX_EMAIL` and `FROM_EMAIL`.
+1. Sign in at [Brevo](https://app.brevo.com) and go to **Settings → API Keys**.
+2. Create an API key with permission to send **Transactional emails**.
+3. Set the environment variable `BREVO_API_KEY` to that key.
+4. Optionally override `PARTNER_INBOX_EMAIL` and `FROM_EMAIL`.
 
 ### Google Sheets setup
 
@@ -60,9 +61,9 @@ In development without a Resend key, the server action logs the payload to the c
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `RESEND_API_KEY` | — | Resend API key for sending registration emails |
+| `BREVO_API_KEY` | — | Brevo API key for sending registration emails |
 | `PARTNER_INBOX_EMAIL` | `partner@phaneosai.com` | Inbox that receives partner registrations |
-| `FROM_EMAIL` | `onboarding@phaneosai.com` | Verified sender domain in Resend |
+| `FROM_EMAIL` | `onboarding@phaneosai.com` | Verified sender email in Brevo |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | — | Service account `client_email` for Google Sheets API |
 | `GOOGLE_PRIVATE_KEY` | — | Service account `private_key` for Google Sheets API |
 | `GOOGLE_SHEET_ID` | `1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk` | Target spreadsheet ID |
