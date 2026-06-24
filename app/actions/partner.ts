@@ -62,18 +62,21 @@ async function appendToSheet(data: PartnerRegistrationData) {
 
     const timestamp = new Date().toISOString();
 
-    // Read the existing header to decide whether to include a Timestamp column.
-    let hasTimestampColumn = false;
+    // Read the existing header to locate a Time/Timestamp/Date column and align values.
+    let timeColumnIndex = -1;
     try {
       const headerResult = await sheets.spreadsheets.values.get({
         spreadsheetId: googleSheetId,
         range: `${sheetName}!A1:Z1`,
       });
       const header = headerResult.data.values?.[0] ?? [];
-      hasTimestampColumn = header[0]?.toString().toLowerCase().includes("timestamp");
+      timeColumnIndex = header.findIndex((h) => {
+        const label = h?.toString().toLowerCase() ?? "";
+        return label.includes("time") || label.includes("timestamp") || label.includes("date");
+      });
     } catch {
       // If the header cannot be read, assume the sheet is empty/new and create one with a timestamp.
-      hasTimestampColumn = true;
+      timeColumnIndex = 0;
     }
 
     const baseRow = [
@@ -84,7 +87,17 @@ async function appendToSheet(data: PartnerRegistrationData) {
       data.model,
       data.message || "—",
     ];
-    const row = hasTimestampColumn ? [timestamp, ...baseRow] : baseRow;
+
+    // Build a row that matches the header width. If a Time column exists, insert
+    // the timestamp at that index; otherwise prepend it for new/empty sheets.
+    let row: string[];
+    if (timeColumnIndex >= 0) {
+      row = [...baseRow];
+      row.splice(timeColumnIndex, 0, timestamp);
+    } else {
+      row = [timestamp, ...baseRow];
+    }
+
     const columns = row.length;
 
     await sheets.spreadsheets.values.append({
