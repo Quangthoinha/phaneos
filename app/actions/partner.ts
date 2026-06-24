@@ -184,6 +184,9 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     }
   } else {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
       const response = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
@@ -198,7 +201,10 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
           subject,
           htmlContent: html,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorBody = await response.text();
@@ -206,8 +212,17 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
         emailResult = { success: false, error: "Failed to send registration. Please try again." };
       }
     } catch (error) {
-      console.error("Partner registration email failed:", error);
-      emailResult = { success: false, error: "Failed to send registration. Please try again." };
+      const isTimeout = error instanceof Error && error.name === "AbortError";
+      console.error(
+        isTimeout ? "Brevo email request timed out" : "Partner registration email failed:",
+        error
+      );
+      emailResult = {
+        success: false,
+        error: isTimeout
+          ? "Email notification timed out."
+          : "Failed to send registration. Please try again.",
+      };
     }
   }
 
