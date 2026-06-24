@@ -45,9 +45,38 @@ async function appendToSheet(data: PartnerRegistrationData) {
 
     const sheets = google.sheets({ version: "v4", auth });
 
+    // Resolve the target sheet name; fall back to the first sheet if the
+    // configured name does not exist. This avoids failures when the default
+    // "Registrations" tab has not been created yet.
+    let sheetName = googleSheetName;
+    try {
+      const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId: googleSheetId });
+      const availableNames =
+        spreadsheet.data.sheets?.map((s) => s.properties?.title).filter(Boolean) ?? [];
+      if (!availableNames.includes(sheetName) && availableNames.length > 0) {
+        sheetName = availableNames[0]!;
+      }
+    } catch {
+      // If we cannot list sheets, keep the configured name and let append fail visibly.
+    }
+
     const timestamp = new Date().toISOString();
-    const row = [
-      timestamp,
+
+    // Read the existing header to decide whether to include a Timestamp column.
+    let hasTimestampColumn = false;
+    try {
+      const headerResult = await sheets.spreadsheets.values.get({
+        spreadsheetId: googleSheetId,
+        range: `${sheetName}!A1:Z1`,
+      });
+      const header = headerResult.data.values?.[0] ?? [];
+      hasTimestampColumn = header[0]?.toString().toLowerCase().includes("timestamp");
+    } catch {
+      // If the header cannot be read, assume the sheet is empty/new and create one with a timestamp.
+      hasTimestampColumn = true;
+    }
+
+    const baseRow = [
       data.agency,
       data.name,
       data.email,
@@ -55,10 +84,12 @@ async function appendToSheet(data: PartnerRegistrationData) {
       data.model,
       data.message || "—",
     ];
+    const row = hasTimestampColumn ? [timestamp, ...baseRow] : baseRow;
+    const columns = row.length;
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: googleSheetId,
-      range: `${googleSheetName}!A1:G1`,
+      range: `${sheetName}!A1:${String.fromCharCode(64 + columns)}1`,
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       requestBody: {

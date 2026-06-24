@@ -49,7 +49,10 @@ Partner registrations are submitted through a server action (`app/actions/partne
    - `client_email` → set as `GOOGLE_SERVICE_ACCOUNT_EMAIL`
    - `private_key` → set as `GOOGLE_PRIVATE_KEY` (paste the full key including `-----BEGIN...-----`)
 4. Open the [registrations spreadsheet](https://docs.google.com/spreadsheets/d/1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk/edit?usp=sharing), click **Share**, and invite the service account email with **Editor** access.
-5. Make sure the sheet contains a tab named `Registrations` (or set `GOOGLE_SHEET_NAME` to a custom name).
+5. Make sure the sheet contains a tab with the expected name:
+   - Default tab name is `Registrations`.
+   - If the sheet only has a default tab like `Trang tính1`, set `GOOGLE_SHEET_NAME=Trang tính1`.
+   - The code will auto-detect the first tab if the configured name is missing, and it will align the row with the existing header (with or without a leading `Timestamp` column).
 
 In development without a Resend key, the server action logs the payload to the console and returns success so the UI flow can still be tested. In production, a missing Resend key returns a real error. The Google Sheets log is best-effort: a failed sheet append is logged but does not block the form submission.
 
