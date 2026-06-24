@@ -14,6 +14,7 @@ interface FormData {
   phone: string;
   model: string;
   message: string;
+  timeToMeet: string;
 }
 
 interface FormErrors {
@@ -27,6 +28,7 @@ const initialData: FormData = {
   phone: "",
   model: "",
   message: "",
+  timeToMeet: "",
 };
 
 const modelOptions = [
@@ -358,18 +360,38 @@ export default function PartnerForm() {
                   )}
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => updateField("message", e.target.value)}
-                    className={inputClasses("message")}
-                    placeholder="How do you want to partner? Any potential clients in mind?"
-                  />
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div className="md:col-span-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => updateField("message", e.target.value)}
+                      className={inputClasses("message")}
+                      placeholder="How do you want to partner? Any potential clients in mind?"
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label htmlFor="timeToMeet" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
+                      Preferred time to meet
+                      <span className="text-[var(--color-muted)] font-normal"> — optional</span>
+                    </label>
+                    <input
+                      id="timeToMeet"
+                      type="text"
+                      value={formData.timeToMeet}
+                      onChange={(e) => updateField("timeToMeet", e.target.value)}
+                      className={inputClasses("timeToMeet")}
+                      placeholder="e.g., Monday 10:00 AM or 2026-07-01 14:00"
+                    />
+                    <p className="mt-1.5 text-sm text-[var(--color-muted)]">
+                      Let us know a convenient time for a 15-minute intro call.
+                    </p>
+                  </div>
                 </div>
 
                 <AnimatedButton

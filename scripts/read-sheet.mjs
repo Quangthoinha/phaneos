@@ -13,7 +13,7 @@ const sheets = google.sheets({ version: "v4", auth });
 
 const result = await sheets.spreadsheets.values.get({
   spreadsheetId: process.env.GOOGLE_SHEET_ID || "1mBYZ78MJUtpqwfXzPo0haH-KteKbn9Sz6h9R-UWsSsk",
-  range: `${process.env.GOOGLE_SHEET_NAME || "Registrations"}!A1:G20`,
+  range: `${process.env.GOOGLE_SHEET_NAME || "Registrations"}!A1:I20`,
 });
 
 console.log("Rows in sheet:");

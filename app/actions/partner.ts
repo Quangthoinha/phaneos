@@ -10,6 +10,7 @@ export interface PartnerRegistrationData {
   phone: string;
   model: string;
   message: string;
+  timeToMeet?: string;
 }
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -62,22 +63,31 @@ async function appendToSheet(data: PartnerRegistrationData) {
 
     const timestamp = new Date().toISOString();
 
-    // Read the existing header to locate a Time/Timestamp/Date column and align values.
-    let timeColumnIndex = -1;
+    // Read the existing header to locate special columns and align values.
+    let header: (string | null)[] = [];
     try {
       const headerResult = await sheets.spreadsheets.values.get({
         spreadsheetId: googleSheetId,
         range: `${sheetName}!A1:Z1`,
       });
-      const header = headerResult.data.values?.[0] ?? [];
-      timeColumnIndex = header.findIndex((h) => {
-        const label = h?.toString().toLowerCase() ?? "";
-        return label.includes("time") || label.includes("timestamp") || label.includes("date");
-      });
+      header = headerResult.data.values?.[0] ?? [];
     } catch {
-      // If the header cannot be read, assume the sheet is empty/new and create one with a timestamp.
-      timeColumnIndex = 0;
+      // If the header cannot be read, leave it empty and create a default one below.
     }
+
+    const headerLabels = header.map((h) => h?.toString().toLowerCase().trim() ?? "");
+
+    // Locate the submission-time column (Time/Timestamp/Date submitted).
+    const submittedTimeIndex = headerLabels.findIndex((label) =>
+      ["time", "timestamp", "date"].some(
+        (keyword) => label.includes(keyword) && !label.includes("meet")
+      )
+    );
+
+    // Locate the preferred meeting time column.
+    const timeToMeetIndex = headerLabels.findIndex((label) =>
+      label.includes("time to meet") || label.includes("meet")
+    );
 
     const baseRow = [
       data.agency,
@@ -88,21 +98,40 @@ async function appendToSheet(data: PartnerRegistrationData) {
       data.message || "—",
     ];
 
-    // Build a row that matches the header width. If a Time column exists, insert
-    // the timestamp at that index; otherwise prepend it for new/empty sheets.
+    // Build a row that matches the header width.
     let row: string[];
-    if (timeColumnIndex >= 0) {
+    if (submittedTimeIndex >= 0) {
       row = [...baseRow];
-      row.splice(timeColumnIndex, 0, timestamp);
+      row.splice(submittedTimeIndex, 0, timestamp);
     } else {
       row = [timestamp, ...baseRow];
+    }
+
+    if (timeToMeetIndex >= 0) {
+      row[timeToMeetIndex] = data.timeToMeet || "—";
+    } else {
+      // If the sheet does not have a "Time to meet" column, append it to the header
+      // and add the value at the end of each new row.
+      row.push(data.timeToMeet || "—");
+      const newHeaderColumn = header.length > 0 ? header.length : row.length - 1;
+      header[newHeaderColumn] = "Time to meet";
+      try {
+        await sheets.spreadsheets.values.update({
+          spreadsheetId: googleSheetId,
+          range: `${sheetName}!A1:Z1`,
+          valueInputOption: "USER_ENTERED",
+          requestBody: { values: [header.map((h) => h ?? "")] },
+        });
+      } catch (headerError) {
+        console.warn("Could not update sheet header with Time to meet column:", headerError);
+      }
     }
 
     const columns = row.length;
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: googleSheetId,
-      range: `${sheetName}!A1:${String.fromCharCode(64 + columns)}1`,
+      range: `${sheetName}!A1:${columnToLetter(columns)}1`,
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       requestBody: {
@@ -118,7 +147,7 @@ async function appendToSheet(data: PartnerRegistrationData) {
 }
 
 export async function submitPartnerRegistration(data: PartnerRegistrationData) {
-  const { agency, name, email, phone, model, message } = data;
+  const { agency, name, email, phone, model, message, timeToMeet } = data;
 
   if (!agency.trim()) return { success: false, error: "Agency name is required" };
   if (!name.trim()) return { success: false, error: "Full name is required" };
@@ -134,6 +163,7 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
     <p><strong>Model:</strong> ${escapeHtml(model)}</p>
+    <p><strong>Preferred time to meet:</strong> ${escapeHtml(timeToMeet || "—")}</p>
     <p><strong>Message:</strong><br/>${escapeHtml(message || "—").replace(/\n/g, "<br/>")}</p>
   `;
 
@@ -190,6 +220,17 @@ export async function submitPartnerRegistration(data: PartnerRegistrationData) {
   }
 
   return { success: true };
+}
+
+function columnToLetter(index: number) {
+  let result = "";
+  let n = index;
+  while (n > 0) {
+    n--;
+    result = String.fromCharCode(65 + (n % 26)) + result;
+    n = Math.floor(n / 26);
+  }
+  return result;
 }
 
 function escapeHtml(text: string) {
