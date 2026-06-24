@@ -56,6 +56,30 @@ const itemVariants = {
   },
 };
 
+function scrollToRegister(model: string) {
+  if (typeof window === "undefined") return;
+
+  // Update the hash with the model selection so PartnerForm can sync it
+  const newHash = `#register?model=${encodeURIComponent(model)}`;
+  history.pushState(null, "", newHash);
+  window.dispatchEvent(new Event("hashchange"));
+
+  const form = document.getElementById("register");
+  if (!form) return;
+
+  // Disable CSS scroll-snap momentarily so smooth scroll works reliably
+  const html = document.documentElement;
+  const originalSnap = html.style.scrollSnapType;
+  html.style.scrollSnapType = "none";
+
+  form.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // Restore snap after the scroll animation finishes (~600ms)
+  setTimeout(() => {
+    html.style.scrollSnapType = originalSnap || "";
+  }, 650);
+}
+
 export default function CommissionTiers() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -119,8 +143,9 @@ export default function CommissionTiers() {
                   </ul>
                 </div>
 
-                <motion.a
-                  href={`#register?model=${tier.modelValue}`}
+                <motion.button
+                  type="button"
+                  onClick={() => scrollToRegister(tier.modelValue)}
                   className="mt-6 inline-flex items-center justify-center gap-2 rounded-md border border-[var(--color-muted)] px-6 py-3.5 text-base font-medium text-[var(--color-ink)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                   whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
@@ -128,7 +153,7 @@ export default function CommissionTiers() {
                 >
                   {tier.cta}
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-                </motion.a>
+                </motion.button>
               </motion.article>
             ))}
           </motion.div>

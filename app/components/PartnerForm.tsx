@@ -76,14 +76,27 @@ export default function PartnerForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const shouldReduceMotion = useReducedMotion();
 
-  // Clean the model query segment from the hash so it does not persist or interfere with anchors
+  // Sync model selection with the URL hash (for "Choose referral/co-selling" CTAs)
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const hash = window.location.hash;
-    if (hash.match(/[?&]model=/)) {
-      const cleanHash = hash.replace(/\?.*$/, "");
-      history.replaceState(null, "", cleanHash || "#register");
-    }
+
+    const applyModelFromHash = () => {
+      const hash = window.location.hash;
+      const match = hash.match(/[?&]model=([^&]+)/);
+      const model = match?.[1];
+      if (model && modelOptions.some((o) => o.value === model)) {
+        setFormData((prev) => ({ ...prev, model }));
+      }
+      // Clean the query segment so the anchor stays valid without query noise
+      if (hash.match(/[?&]model=/)) {
+        const cleanHash = hash.replace(/\?.*$/, "");
+        history.replaceState(null, "", cleanHash || "#register");
+      }
+    };
+
+    applyModelFromHash();
+    window.addEventListener("hashchange", applyModelFromHash);
+    return () => window.removeEventListener("hashchange", applyModelFromHash);
   }, []);
 
   const validate = (): boolean => {
@@ -195,6 +208,7 @@ export default function PartnerForm() {
 
           <motion.div variants={shouldReduceMotion ? undefined : itemVariants}>
             <form
+              id="partner-form"
               onSubmit={handleSubmit}
               className="bg-[var(--color-surface)] rounded-xl p-6 md:p-8"
               aria-label="Register as a partner"
