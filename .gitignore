@@ -43,6 +43,7 @@ yarn-error.log*
 
 # temporary review screenshots
 /final-*.png
+/public/screenshot-*.png
 
 # typescript
 *.tsbuildinfo
@@ -50,3 +51,14 @@ next-env.d.ts
 
 .vercel
 .env.local
+
+# build output
+/dist
+
+# tool caches
+.impeccable/
+
+# unrelated scratch assets
+user-video.mp4
+ffmpeg.zip
+/scripts/crawl-fb-jobs.js

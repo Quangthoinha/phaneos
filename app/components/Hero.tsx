@@ -66,12 +66,14 @@ export default function Hero() {
           whileInView="visible"
           viewport={{ once: false, amount: 0.5 }}
         >
-          <motion.p
+          <motion.div
             variants={shouldReduceMotion ? undefined : itemVariants}
-            className="text-sm font-semibold uppercase tracking-[0.05em] text-[var(--color-primary)] mb-4"
+            className="mb-5"
           >
-            AI integration partner for agencies
-          </motion.p>
+            <span className="badge-primary">
+              AI integration partner for agencies
+            </span>
+          </motion.div>
 
           <motion.h1
             variants={shouldReduceMotion ? undefined : itemVariants}

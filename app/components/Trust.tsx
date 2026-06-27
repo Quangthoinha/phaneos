@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
-import AnimatedIcon from "./AnimatedIcon";
+import StaggerReveal from "./StaggerReveal";
 import { Shield, Handshake, FileText } from "lucide-react";
 
 const trustPoints = [
@@ -26,32 +25,7 @@ const trustPoints = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
 export default function Trust() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <SectionReveal
       id="trust"
@@ -59,56 +33,36 @@ export default function Trust() {
       snap="relaxed"
     >
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
-        <motion.div
-          className="max-w-[75ch] mb-12 md:mb-16"
-          variants={shouldReduceMotion ? undefined : containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.35 }}
-        >
-          <motion.h2
-            variants={shouldReduceMotion ? undefined : itemVariants}
-            className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-balance mb-5"
-          >
-            You keep the relationship.
-            <br />
-            We handle the AI.
-          </motion.h2>
-          <motion.p
-            variants={shouldReduceMotion ? undefined : itemVariants}
-            className="section-heading text-section leading-[1.65] text-white/80 max-w-prose"
-          >
-            This is what agencies worry about most when bringing in a third-party partner. phaneosAI is designed to remove that risk from day one.
-          </motion.p>
-        </motion.div>
+        <div className="grid xl:grid-cols-12 gap-12 xl:gap-20">
+          <StaggerReveal className="xl:col-span-5">
+            <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-balance mb-5">
+              You keep the relationship.
+              <br />
+              We handle the AI.
+            </h2>
+            <p className="section-heading text-section leading-[1.65] text-white max-w-prose">
+              This is what agencies worry about most when bringing in a third-party partner. phaneosAI is designed to remove that risk from day one.
+            </p>
+          </StaggerReveal>
 
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 lg:gap-10"
-          variants={shouldReduceMotion ? undefined : containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.35 }}
-        >
-          {trustPoints.map((point) => (
-            <motion.div
-              key={point.title}
-              variants={shouldReduceMotion ? undefined : itemVariants}
-              className="flex flex-col h-full p-6 md:p-8 rounded-xl bg-white/5 border border-white/10"
-              whileHover={
-                shouldReduceMotion
-                  ? { backgroundColor: "rgba(255,255,255,0.08)" }
-                  : { y: -4, backgroundColor: "rgba(255,255,255,0.08)" }
-              }
-              transition={{ type: "spring", stiffness: 300, damping: 24 }}
-            >
-              <AnimatedIcon className="text-[var(--color-primary)] mb-4">
-                <point.icon size={28} strokeWidth={2} />
-              </AnimatedIcon>
-              <h3 className="text-xl font-semibold mb-3">{point.title}</h3>
-              <p className="text-base leading-[1.65] text-white/80 max-w-prose">{point.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+          <div className="xl:col-span-7 flex flex-col gap-10 md:gap-12">
+            {trustPoints.map((point, index) => (
+              <StaggerReveal key={point.title} staggerIndex={index}>
+                <div className="flex gap-5 md:gap-6">
+                  <div className="shrink-0 mt-1">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-[var(--color-primary)]">
+                      <point.icon size={20} strokeWidth={2} />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-semibold mb-2">{point.title}</h3>
+                    <p className="text-base leading-[1.65] text-white max-w-prose">{point.description}</p>
+                  </div>
+                </div>
+              </StaggerReveal>
+            ))}
+          </div>
+        </div>
       </div>
     </SectionReveal>
   );

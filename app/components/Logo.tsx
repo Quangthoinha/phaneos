@@ -1,7 +1,6 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 interface LogoProps {
   className?: string;
@@ -16,7 +15,7 @@ export default function Logo({
   variant = "default",
   scrollProgress = 0,
 }: LogoProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const [reduceMotion, setReduceMotion] = useState(false);
   const isBadge = variant === "badge";
   const isMark = variant === "mark";
   const isLight = variant === "light";
@@ -32,16 +31,24 @@ export default function Logo({
   const coinRef = useRef<SVGGElement>(null);
   const figureRef = useRef<SVGGElement>(null);
 
-  // Smoothly interpolate scroll progress for the logo animation
   useEffect(() => {
-    if (shouldReduceMotion || !coinRef.current || !figureRef.current) return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion || !coinRef.current || !figureRef.current) return;
 
     let rafId: number;
     const step = () => {
       const delta = scrollProgress - dampedProgress.current;
       dampedProgress.current += delta * 0.08;
 
-      const rotation = dampedProgress.current * 180; // subtle half-turn across full page
+      const rotation = dampedProgress.current * 180;
       const lift = Math.sin(dampedProgress.current * Math.PI * 2) * 1.5;
       const figureShift = dampedProgress.current * 3;
 
@@ -59,7 +66,7 @@ export default function Logo({
 
     rafId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafId);
-  }, [scrollProgress, shouldReduceMotion]);
+  }, [scrollProgress, reduceMotion]);
 
   const fontSize = size * 0.675;
   const style: CSSProperties = {
@@ -70,9 +77,7 @@ export default function Logo({
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <span
-        className={`inline-flex items-center justify-center ${
-          isBadge ? "rounded-md" : ""
-        }`}
+        className={`inline-flex items-center justify-center ${isBadge ? "rounded-md" : ""}`}
         style={
           isBadge
             ? {
@@ -93,10 +98,8 @@ export default function Logo({
           aria-hidden="true"
           className={isBadge ? "" : "block"}
         >
-          {/* Sun disc */}
           <circle cx="24" cy="16" r="10" fill={sunColor} />
 
-          {/* Sun rays — simple geometric ticks */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
             const rad = (angle * Math.PI) / 180;
             const inner = 11.5;
@@ -119,9 +122,7 @@ export default function Logo({
             );
           })}
 
-          {/* Human figure reaching for the sun */}
           <g ref={figureRef}>
-            {/* Body arc */}
             <path
               d="M8 32C8 32 10 26 13 24C16 22 18 23 18 25C18 27 16 28 14 30"
               stroke={figureColor}
@@ -130,9 +131,7 @@ export default function Logo({
               strokeLinejoin="round"
               fill="none"
             />
-            {/* Head */}
             <circle cx="15" cy="21" r="3" fill={figureColor} />
-            {/* Reaching arm */}
             <path
               d="M16 23C18 20 20 18 23 18"
               stroke={figureColor}
@@ -142,7 +141,6 @@ export default function Logo({
             />
           </g>
 
-          {/* Coin pulled from the sun */}
           <g ref={coinRef}>
             <circle cx="22" cy="16" r="3.2" fill={coinColor} />
             <circle

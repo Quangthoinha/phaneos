@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitPartnerRegistration } from "../actions/partner";
 import SectionReveal from "./SectionReveal";
+import StaggerReveal from "./StaggerReveal";
 import AnimatedButton from "./AnimatedButton";
 
 interface FormData {
@@ -38,29 +38,6 @@ const modelOptions = [
   { value: "both", label: "Both — decide per client" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
 function getInitialModel(): string {
   if (typeof window === "undefined") return "";
   const hash = window.location.hash;
@@ -77,9 +54,7 @@ export default function PartnerForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState<string>("");
-  const shouldReduceMotion = useReducedMotion();
 
-  // Sync model selection with the URL hash (for "Choose referral/co-selling" CTAs)
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -90,7 +65,6 @@ export default function PartnerForm() {
       if (model && modelOptions.some((o) => o.value === model)) {
         setFormData((prev) => ({ ...prev, model }));
       }
-      // Clean the query segment so the anchor stays valid without query noise
       if (hash.match(/[?&]model=/)) {
         const cleanHash = hash.replace(/\?.*$/, "");
         history.replaceState(null, "", cleanHash || "#register");
@@ -176,14 +150,8 @@ export default function PartnerForm() {
       snap="relaxed"
     >
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
-        <motion.div
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start"
-          variants={shouldReduceMotion ? undefined : containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.35 }}
-        >
-          <motion.div className="max-w-[55ch]" variants={shouldReduceMotion ? undefined : itemVariants}>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <StaggerReveal className="max-w-[55ch]">
             <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
               Start in five minutes
             </h2>
@@ -211,9 +179,9 @@ export default function PartnerForm() {
                 <span>1:1 support on your first co-sale</span>
               </p>
             </div>
-          </motion.div>
+          </StaggerReveal>
 
-          <motion.div variants={shouldReduceMotion ? undefined : itemVariants}>
+          <StaggerReveal staggerIndex={1}>
             <form
               id="partner-form"
               onSubmit={handleSubmit}
@@ -433,8 +401,8 @@ export default function PartnerForm() {
                 </div>
               )}
             </form>
-          </motion.div>
-        </motion.div>
+          </StaggerReveal>
+        </div>
       </div>
     </SectionReveal>
   );
