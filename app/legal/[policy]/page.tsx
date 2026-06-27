@@ -28,14 +28,43 @@ export async function generateStaticParams() {
   return POLICIES.map((policy) => ({ policy }));
 }
 
+const DESCRIPTIONS: Record<string, string> = {
+  "privacy-policy":
+    "phaneosAI Privacy Policy: how we collect, use, and protect personal data. GDPR Article 13/14 and Vietnam PDPD compliant.",
+  "terms-of-service":
+    "phaneosAI Terms of Service: general terms for using our website and AI integration services.",
+  "acceptable-use-policy":
+    "phaneosAI Acceptable Use Policy: rules for using our services, including prohibited and high-risk AI use cases.",
+  "ai-usage-policy":
+    "phaneosAI AI Usage Policy: how we use AI, our no-training commitment, human oversight, and EU AI Act alignment.",
+  "partner-program-policy":
+    "phaneosAI Partner Program Policy: commission tiers, deal registration, relationship protection, and clawbacks.",
+  "security-policy":
+    "phaneosAI Security Policy: security controls, access management, incident response, and subprocessor safeguards.",
+  "data-processing-addendum":
+    "phaneosAI Data Processing Addendum: controller/processor terms, SCCs, subprocessor list, and breach notification.",
+};
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ policy: string }>;
 }): Promise<Metadata> {
   const { policy } = await params;
+  const title = TITLES[policy] || "Legal — phaneosAI";
+  const description = DESCRIPTIONS[policy] || "Legal document for phaneosAI.";
+
   return {
-    title: TITLES[policy] || "Legal — phaneosAI",
+    title,
+    description,
+    alternates: {
+      canonical: `/legal/${policy}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/legal/${policy}`,
+    },
     robots: { index: true, follow: true },
   };
 }

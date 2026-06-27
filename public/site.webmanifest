@@ -1,0 +1,17 @@
+{
+  "name": "phaneosAI — AI Integration Partner for Agencies",
+  "short_name": "phaneosAI",
+  "description": "phaneosAI helps agencies sell and deliver AI integration services to their clients. Referral 12%. Co-selling 25%.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

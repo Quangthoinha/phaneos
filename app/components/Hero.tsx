@@ -42,10 +42,11 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero-office.jpg"
-          alt=""
+          alt="Modern office workspace representing AI-powered agency services"
           fill
           priority
           sizes="100vw"
+          fetchPriority="high"
           className="object-cover"
         />
         {/* Base darkening gradient for global readability */}

@@ -1,11 +1,19 @@
 import type { MetadataRoute } from "next";
 
+const SITE_URL = "https://phaneosai.com";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: [
+        "/api/",
+        "/_next/",
+        "/404",
+      ],
     },
-    sitemap: "https://phaneosai.com/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

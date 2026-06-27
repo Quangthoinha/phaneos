@@ -97,10 +97,11 @@ export default function CommissionTiers() {
                   <button
                     type="button"
                     onClick={() => scrollToRegister(tier.modelValue)}
+                    aria-label={`Select ${tier.model} partnership model`}
                     className="mt-6 inline-flex items-center justify-center gap-2 rounded-md border border-[var(--color-muted)] px-6 py-3.5 text-base font-medium text-[var(--color-ink)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] group"
                   >
                     {tier.cta}
-                    <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                    <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 </article>
               </StaggerReveal>

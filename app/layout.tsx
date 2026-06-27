@@ -9,54 +9,117 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "phaneosAI",
-  url: "https://phaneosai.com",
-  description:
-    "AI integration partner for agencies. Referral 12%. Co-selling 25%. Agencies keep the client relationship; phaneosAI delivers the AI expertise.",
-  email: "hello@phaneos.cloud",
-  sameAs: ["https://www.linkedin.com/in/phaneos-ai-undefined-b50bb4416/?skipRedirect=true"],
-};
+const SITE_URL = "https://phaneosai.com";
+const SITE_NAME = "phaneosAI";
+const DEFAULT_DESCRIPTION =
+  "phaneosAI helps agencies sell and deliver AI integration services to their clients. Referral 12%. Co-selling 25%. You keep the relationship; we bring the AI expertise.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://phaneosai.com"),
-  title: "phaneosAI — AI Integration Partner for Agencies",
-  description:
-    "Help your agency sell AI strategy, workflow automation, custom agents, and LLM integration to existing clients. Referral 12%. Co-selling 25%. You keep the relationship; we bring the AI expertise.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — AI Integration Partner for Agencies`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  generator: "Next.js",
+  keywords: [
+    "AI integration partner",
+    "AI agency partner program",
+    "AI services for agencies",
+    "AI workflow automation",
+    "LLM integration",
+    "AI co-selling",
+    "AI referral partner",
+    "white-label AI services",
+    "agency AI enablement",
+  ],
+  referrer: "origin-when-cross-origin",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "phaneosAI — AI Integration Partner for Agencies",
-    description:
-      "Help your agency sell AI services to existing clients. Referral 12%. Co-selling 25%. You keep the relationship.",
     type: "website",
     locale: "en_US",
-    siteName: "phaneosAI",
+    alternateLocale: ["vi_VN"],
+    url: "/",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — AI Integration Partner for Agencies`,
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "phaneosAI — AI Integration Partner for Agencies",
+        alt: `${SITE_NAME} — AI Integration Partner for Agencies`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "phaneosAI — AI Integration Partner for Agencies",
-    description:
-      "Help your agency sell AI services to existing clients. Referral 12%. Co-selling 25%. You keep the relationship.",
+    site: "@phaneosai",
+    creator: "@phaneosai",
+    title: `${SITE_NAME} — AI Integration Partner for Agencies`,
+    description: DEFAULT_DESCRIPTION,
     images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": `${SITE_URL}/rss.xml`,
+    },
   },
-  robots: {
-    index: true,
-    follow: true,
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-icon.png",
   },
+  manifest: "/site.webmanifest",
   other: {
-    "application/ld+json": JSON.stringify(structuredData),
+    "application/ld+json": JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: `${SITE_URL}/og-image.png`,
+        description: DEFAULT_DESCRIPTION,
+        email: "hello@phaneos.cloud",
+        sameAs: [
+          "https://www.linkedin.com/in/phaneos-ai-undefined-b50bb4416/?skipRedirect=true",
+        ],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/legal?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+    ]),
   },
 };
 
@@ -66,7 +129,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      dir="ltr"
+      className={`${manrope.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main-content"

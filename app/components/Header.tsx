@@ -11,6 +11,7 @@ const navLinks = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#services", label: "Services" },
   { href: "#faq", label: "FAQ" },
+  { href: "/legal", label: "Legal" },
 ];
 
 const SCROLL_UP_REVEAL_THRESHOLD = 8;

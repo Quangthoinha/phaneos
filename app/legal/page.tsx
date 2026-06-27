@@ -46,9 +46,18 @@ const DOCS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Legal — phaneosAI",
+  title: "Legal & Compliance",
   description:
-    "Legal and compliance documents for phaneosAI, including Privacy Policy, Terms of Service, AI Usage Policy, and more.",
+    "Legal and compliance documents for phaneosAI, including Privacy Policy, Terms of Service, AI Usage Policy, Partner Program Policy, Security Policy, and Data Processing Addendum.",
+  alternates: {
+    canonical: "/legal",
+  },
+  openGraph: {
+    title: "Legal & Compliance — phaneosAI",
+    description:
+      "Privacy Policy, Terms of Service, AI Usage Policy, Partner Program Policy, Security Policy, and Data Processing Addendum for phaneosAI.",
+    url: "/legal",
+  },
   robots: { index: true, follow: true },
 };
 
