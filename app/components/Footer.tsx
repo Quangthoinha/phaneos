@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail } from "lucide-react";
-import Logo from "./Logo";
+import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 import ScrollReveal from "./ScrollReveal";
 import StaggerReveal from "./StaggerReveal";

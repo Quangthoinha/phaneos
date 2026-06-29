@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Logo from "./Logo";
+import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 
 const navLinks = [
@@ -18,7 +18,6 @@ const SCROLL_UP_REVEAL_THRESHOLD = 8;
 const SCROLL_DOWN_HIDE_THRESHOLD = 80;
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -31,24 +30,12 @@ export default function Header() {
   const closeMenu = useCallback(() => setMobileOpen(false), []);
   const toggleMenu = useCallback(() => setMobileOpen((prev) => !prev), []);
 
-  // Scroll progress for logo animation
-  const { scrollYProgress } = useScroll();
-  const logoProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const [progressValue, setProgressValue] = useState(0);
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-    return logoProgress.on("change", (v) => setProgressValue(v));
-  }, [logoProgress, shouldReduceMotion]);
-
   // Track scroll direction and swap header background / visibility
   useEffect(() => {
     const update = () => {
       const current = window.scrollY;
       const previous = lastScrollY.current;
       const delta = current - previous;
-
-      setScrolled(current > 10);
 
       if (mobileOpen || current < SCROLL_DOWN_HIDE_THRESHOLD) {
         setHidden(false);
@@ -152,11 +139,7 @@ export default function Header() {
   return (
     <motion.header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 h-[var(--header-height)] ${
-        scrolled
-          ? "bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-muted)]/10"
-          : "bg-transparent border-b border-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 h-[var(--header-height)] bg-white border-b border-[var(--color-muted)]/10 shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
       initial={false}
       animate={{
         y: hidden ? "-100%" : "0%",
@@ -167,6 +150,12 @@ export default function Header() {
       }}
       style={{
         transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+        zIndex: 99999,
+        backgroundColor: "#ffffff",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
       }}
     >
       <div className="container-wide h-full flex items-center justify-between">
@@ -178,11 +167,7 @@ export default function Header() {
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
           aria-label="phaneosAI - Back to top"
         >
-          <Logo
-            size={44}
-            variant="badge"
-            scrollProgress={progressValue}
-          />
+          <Logo size={36} />
         </motion.a>
 
         {/* Desktop navigation */}
@@ -256,7 +241,8 @@ export default function Header() {
                 duration: shouldReduceMotion ? 0.01 : 0.25,
                 ease: [0.25, 1, 0.5, 1],
               }}
-              className="md:hidden absolute top-[var(--header-height)] left-0 right-0 bg-[var(--color-bg)] border-b border-[var(--color-muted)]/10 shadow-[0_12px_24px_-8px_var(--color-shadow)]"
+              className="md:hidden fixed top-[var(--header-height)] left-0 right-0 bg-white border-b border-[var(--color-muted)]/10 shadow-[0_12px_24px_-8px_var(--color-shadow)]"
+              style={{ zIndex: 99998, backgroundColor: "#ffffff" }}
             >
               <nav
                 className="container-wide py-6 flex flex-col gap-2"
