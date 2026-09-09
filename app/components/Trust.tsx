@@ -2,32 +2,32 @@
 
 import SectionReveal from "./SectionReveal";
 import StaggerReveal from "./StaggerReveal";
-import { ShieldCheck, Lock, UserCheck, MessageSquareCode } from "lucide-react";
+import { ShieldCheck, Lock, UserCheck, EyeOff } from "lucide-react";
 
 const trustPoints = [
   {
     icon: Lock,
-    title: "Ironclad Non-Circumvention Protection",
+    title: "100% Brand & Audience Ownership",
     description:
-      "We sign a bilateral legal partner agreement before entering any client room. We never pitch, contact, or service your clients independently under any circumstances. Your clients remain 100% yours.",
+      "You own your YouTube channel, Instagram page, email subscribers, and digital intellectual property forever. We are purely your backstage growth and monetization partner.",
   },
   {
     icon: ShieldCheck,
-    title: "Zero-PII & UK GDPR Article 28 Compliance",
+    title: "Zero Financial Risk — £0 Upfront",
     description:
-      "We enforce zero-data-retention provider tiers across Anthropic and OpenAI. Client proprietary data is never used to train external models, and all data processing complies with UK GDPR & DPA 2018 standards.",
+      "No retainer fees, no setup costs, no hidden software charges. We invest our own time and engineering into building your backend. We only earn a percentage of newly generated revenue.",
   },
   {
     icon: UserCheck,
-    title: "Mandatory Human-in-the-Loop QA Gate",
+    title: "High-Integrity Audience Protection",
     description:
-      "No autonomous agent output or code deliverable is sent to your client without senior technical operator review. You never have to worry about embarrassing AI hallucinations or reputational damage.",
+      "We never push sleazy, scammy tactics onto your audience. Every funnel, VSL, and digital product is crafted to elevate your authority and deliver life-changing real value to your viewers.",
   },
   {
-    icon: MessageSquareCode,
-    title: "Dedicated Partner Slack Connect Channel",
+    icon: EyeOff,
+    title: "Discreet Shadow Operation",
     description:
-      "Direct, real-time communication channel between our lead operators and your agency founders. Sub-4-hour response SLAs on proposal drafting, client questions, and technical scoping.",
+      "We operate behind the scenes. Your audience doesn't see a middleman; they see their favorite creator launching a world-class, professional digital ecosystem.",
   },
 ];
 
@@ -40,18 +40,19 @@ export default function Trust() {
       <div className="container-wide w-full">
         <div className="grid xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <StaggerReveal className="xl:col-span-4">
-            <span className="badge-glass mb-4 text-emerald-400 font-semibold text-xs uppercase tracking-wider">
-              Legal & Trust Vault
+            <span className="badge-glass mb-4 text-emerald-400 font-semibold text-xs uppercase tracking-wider flex items-center gap-1.5 w-fit">
+              <EyeOff className="w-3.5 h-3.5" />
+              <span>Creator First</span>
             </span>
             <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
-              Protecting Your Agency's Reputation Above All Else
+              Protecting Your Community and Brand Above All Else
             </h2>
             <p className="text-section leading-relaxed text-slate-400 mb-6">
-              Agency founders are rightly protective of the client relationships they spent years nurturing. phaneosAI is architected from the ground up to eliminate commercial and operational risk.
+              Creators spend years building genuine trust with their audience. Our entire business model is built to protect that trust while unlocking the revenue you rightfully deserve.
             </p>
             <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-              <strong className="block mb-1 font-bold text-emerald-200">The Partner Promise:</strong>
-              If you introduce a lead or co-sell an account, you maintain sole client ownership for the lifetime of that relationship.
+              <strong className="block mb-1 font-bold text-emerald-200">The Shadow Operator Pact:</strong>
+              We build the systems. You keep the audience. We win together on real performance.
             </div>
           </StaggerReveal>
 

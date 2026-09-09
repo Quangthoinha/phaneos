@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Sparkles, ArrowRight, ShieldCheck, Zap, Lock, Users } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Zap, Lock, EyeOff, PlayCircle } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
 const contentVariants = {
@@ -46,7 +46,7 @@ export default function Hero() {
     >
       {/* Dynamic Ambient Background Glows */}
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-gradient-to-tr from-[var(--color-primary)]/20 via-rose-600/10 to-transparent blur-[140px] pointer-events-none"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-gradient-to-tr from-[var(--color-primary)]/25 via-rose-600/10 to-transparent blur-[140px] pointer-events-none"
         aria-hidden="true"
       />
       <div
@@ -67,8 +67,8 @@ export default function Hero() {
             variants={shouldReduceMotion ? undefined : itemVariants}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 mb-8 backdrop-blur-md shadow-sm"
           >
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-            <span>Founding Partner Cohort Open — Limited to 5 UK & Global Agencies</span>
+            <EyeOff className="w-3.5 h-3.5 text-rose-400" />
+            <span>2026 Shadow Operating Model — Accepting 5 Select Creators & Experts</span>
           </motion.div>
 
           {/* Master Headline */}
@@ -76,9 +76,9 @@ export default function Hero() {
             variants={shouldReduceMotion ? undefined : itemVariants}
             className="text-[clamp(2.75rem,5.5vw,5.5rem)] font-black leading-[1.04] tracking-[-0.035em] text-white mb-8 text-balance"
           >
-            Sell Enterprise AI Services.{" "}
+            You Make the Content.{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-200 to-amber-200">
-              Keep 100% of Your Client Relationships.
+              We Operate the Business in the Shadows.
             </span>
           </motion.h1>
 
@@ -87,7 +87,7 @@ export default function Hero() {
             variants={shouldReduceMotion ? undefined : itemVariants}
             className="text-[clamp(1.125rem,1.4vw,1.35rem)] leading-[1.65] text-slate-300 mb-10 max-w-2xl mx-auto text-pretty font-normal"
           >
-            phaneosAI co-delivers AI strategy, autonomous workflow agents, and custom LLM solutions with digital agencies. You keep the trusted relationship; we bring the senior technical operators.
+            Stop leaking 40% of your audience to naked Calendly links and text-heavy pages. We architect high-converting 7-minute VSL funnels, turnkey AI digital products, and automated backend lead engines — on a pure <strong>20% – 50% revenue share split</strong>.
           </motion.p>
 
           {/* Interactive CTAs */}
@@ -100,7 +100,7 @@ export default function Hero() {
               onClick={() => handleScrollTo("calculator")}
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-semibold text-base flex items-center justify-center gap-2.5 shadow-xl shadow-rose-950/50 hover:shadow-rose-900/60 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <span>Calculate Agency Revenue</span>
+              <span>Calculate Unlocked Revenue</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -109,8 +109,8 @@ export default function Hero() {
               onClick={() => handleScrollTo("register")}
               className="w-full sm:w-auto px-7 py-4 rounded-xl glass-card text-white font-semibold text-base flex items-center justify-center gap-2 hover:bg-white/10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <Users className="w-4 h-4 text-slate-300" />
-              <span>Apply for Cohort</span>
+              <PlayCircle className="w-4 h-4 text-rose-400" />
+              <span>Get Free Shadow Audit</span>
             </button>
           </motion.div>
 
@@ -124,8 +124,8 @@ export default function Hero() {
                 <Zap className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">25% Co-selling Split</h2>
-                <p className="text-xs text-slate-400">High-margin revenue on every contract closed together.</p>
+                <h2 className="text-sm font-bold text-white mb-0.5">20% – 50% Rev-Share</h2>
+                <p className="text-xs text-slate-400">Zero upfront fees. We only earn when we grow your monthly revenue.</p>
               </div>
             </div>
 
@@ -134,8 +134,8 @@ export default function Hero() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">Zero Tech Hires</h2>
-                <p className="text-xs text-slate-400">No £85k engineering salaries or trial-and-error risks.</p>
+                <h2 className="text-sm font-bold text-white mb-0.5">100% Brand Ownership</h2>
+                <p className="text-xs text-slate-400">Your audience, content, and IP remain 100% yours forever.</p>
               </div>
             </div>
 
@@ -144,8 +144,8 @@ export default function Hero() {
                 <Lock className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">Non-Circumvention</h2>
-                <p className="text-xs text-slate-400">Ironclad contract: We never approach your clients directly.</p>
+                <h2 className="text-sm font-bold text-white mb-0.5">Top Achiever Playbook</h2>
+                <p className="text-xs text-slate-400">We benchmark and clone what the top 1% in your niche are executing.</p>
               </div>
             </div>
           </motion.div>
@@ -157,15 +157,15 @@ export default function Hero() {
           >
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              £1,200,000+ In Client Pipeline Analyzed
+              Sweet Spot: 1,000 – 10,000 Views / Video
             </span>
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              Sub-60s Lead Response Infrastructure
+              7-Minute VSL & Sub-60s Funnel Architecture
             </span>
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              UK GDPR Article 28 Compliant
+              Zero Tech or Operational Burden for Creator
             </span>
           </motion.div>
         </motion.div>

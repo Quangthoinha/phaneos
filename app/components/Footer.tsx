@@ -10,9 +10,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { href: "#benefits", label: "Benefits" },
-    { href: "#how-it-works", label: "How it works" },
-    { href: "#services", label: "Services" },
+    { href: "#calculator", label: "Rev-Share Calculator" },
+    { href: "#comparison", label: "The Shadow Model" },
+    { href: "#tiers", label: "Partnership Tiers" },
+    { href: "#how-it-works", label: "How It Works" },
+    { href: "#services", label: "5 Shadow Engines" },
+    { href: "#trust", label: "Creator Protection" },
     { href: "#faq", label: "FAQ" },
     { href: "/legal", label: "Legal" },
   ];
@@ -23,14 +26,17 @@ export default function Footer() {
       <ScrollReveal className="bg-[var(--color-ink)] border-b border-white/10">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-16 md:py-24">
           <div className="max-w-[75ch]">
+            <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider">
+              Zero Upfront Risk — 100% Aligned
+            </span>
             <h2 className="text-[clamp(2rem,3vw,3.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-balance mb-5">
-              Your clients are already asking about AI.
+              Stop Leaving £10k–£50k/mo on the Table.
             </h2>
-            <p className="text-[clamp(1rem,1vw,1.125rem)] leading-[1.65] text-white mb-8 max-w-[55ch]">
-              Be the agency that has a clear answer. Partner with phaneosAI and start offering AI integration under your own brand.
+            <p className="text-[clamp(1rem,1vw,1.125rem)] leading-[1.65] text-slate-400 mb-8 max-w-[55ch]">
+              You make the content. We engineer, launch, and manage your entire backend monetization machine in the shadows on a pure 20%–50% revenue-share basis.
             </p>
-            <AnimatedButton href="#register" variant="primary" className="py-4 px-8">
-              Become a Partner
+            <AnimatedButton href="#register" variant="primary" className="py-4 px-8 text-base font-semibold">
+              Claim Your Free Shadow Funnel Audit
             </AnimatedButton>
           </div>
         </div>
@@ -46,11 +52,11 @@ export default function Footer() {
             >
               <Logo variant="light" size={40} />
             </a>
-            <p className="text-base leading-[1.65] text-white mb-4">
-              AI integration partner for agencies worldwide. Expand your service offering without expanding your headcount.
+            <p className="text-base leading-[1.65] text-slate-300 mb-4">
+              Backstage growth and operating partner for creators & niche experts. We unlock scalable backend cashflow through 7-minute VSLs and AI digital products.
             </p>
-            <p className="text-sm text-white/70">
-              Early stage. Building alongside pioneering agencies.
+            <p className="text-sm text-slate-500">
+              Zero Upfront Fees. 100% Brand Ownership. Operating in the shadows.
             </p>
           </StaggerReveal>
 

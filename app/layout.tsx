@@ -10,14 +10,14 @@ const manrope = Manrope({
 });
 
 const SITE_URL = "https://phaneosai.com";
-const SITE_NAME = "phaneosAI";
+const SITE_NAME = "phaneos";
 const DEFAULT_DESCRIPTION =
-  "phaneosAI helps agencies sell and deliver AI integration services to their clients. Referral 12%. Co-selling 25%. You keep the relationship; we bring the AI expertise.";
+  "phaneos is a Premier Shadow Operator for Creators & Experts. You create the content; we engineer the backend monetization, VSL funnels, AI digital products, and lead systems on a 20%-50% revenue share split.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — AI Integration Partner for Agencies`,
+    default: `${SITE_NAME} — Premier Shadow Operator for Creators & Experts`,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -25,15 +25,15 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   generator: "Next.js",
   keywords: [
-    "AI integration partner",
-    "AI agency partner program",
-    "AI services for agencies",
-    "AI workflow automation",
-    "LLM integration",
-    "AI co-selling",
-    "AI referral partner",
-    "white-label AI services",
-    "agency AI enablement",
+    "Shadow Operator",
+    "Shadow Operating",
+    "Creator Monetization Partner",
+    "VSL Funnel Optimization",
+    "AI Digital Products",
+    "Revenue Share Partnership",
+    "Speed to Lead Automation",
+    "Kim Blanc Shadow Operating",
+    "Backend Growth Partner",
   ],
   referrer: "origin-when-cross-origin",
   robots: {

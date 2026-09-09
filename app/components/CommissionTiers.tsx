@@ -1,42 +1,44 @@
 "use client";
 
-import { ArrowRight, Check, Sparkles, Percent } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Percent, EyeOff } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import StaggerReveal from "./StaggerReveal";
 
 const tiers = [
   {
-    model: "Referral Partner",
-    rate: "12%",
-    period: "of net contract value",
-    summary: "You introduce. We sell and deliver. You earn 12%.",
+    model: "Backend Monetization Launch",
+    rate: "70 / 30",
+    period: "Creator takes 70% • £0 Upfront",
+    summary: "Turn your audience into an automated digital product revenue engine.",
     description:
-      "Ideal for agencies wanting a completely hands-off revenue stream. Pass us a warm client introduction, and our senior operators handle the discovery, proposal, architecture, and deployment.",
+      "Ideal for creators with 1k–10k views who have never monetized beyond AdSense. We package your expertise into a 3DS digital product (Notion OS, templates, private vault) with automated checkout and email delivery.",
     features: [
-      "100% passive commission on first 12 months",
-      "Zero sales calls or technical work required",
-      "White-label or co-branded delivery options",
-      "Full deal registration & relationship protection",
+      "Turnkey Digital Product & SOP Vault creation",
+      "Stripe / Whop payment routing with auto-split",
+      "Conversion-optimized landing page with social proof",
+      "5-Day automated email nurture sequence",
+      "14-Day deployment from kickoff to first sale",
     ],
-    cta: "Choose Referral (12%)",
-    modelValue: "referral",
+    cta: "Apply for 70/30 Launch",
+    modelValue: "rev-share-30",
     popular: false,
   },
   {
-    model: "Co-Selling Partner",
-    rate: "25%",
-    period: "of net contract value",
-    summary: "We pitch together. You keep the relationship. You earn 25%.",
+    model: "Full-Stack Shadow Operating",
+    rate: "50 / 50",
+    period: "Equal Co-Op Split • £0 Upfront",
+    summary: "You produce the content. We build and run the entire backend business.",
     description:
-      "Designed for agencies looking to expand their commercial footprint. We join your client pitches as your dedicated AI practice, build the architecture together, and split 25% of the total revenue.",
+      "Our flagship partnership for ambitious creators. We architect your complete high-ticket monetization engine: 7-minute VSL, 3-question filter funnel, sub-60s CRM lead routing, client onboarding, and community management.",
     features: [
-      "High-margin 25% split on all closed contracts",
-      "We join client meetings as your AI practice",
-      "Turnkey pitch decks, case studies, and scopes",
-      "You remain the primary visible client contact",
+      "High-converting 7-Minute VSL script & production",
+      "Pre-qualification funnel (kills naked Calendly links)",
+      "Sub-60s SMS/Email lead routing & CRM automation",
+      "We handle customer onboarding & fulfillment support",
+      "Weekly revenue reporting & continuous A/B testing",
     ],
-    cta: "Choose Co-Selling (25%)",
-    modelValue: "co-selling",
+    cta: "Apply for 50/50 Co-Op",
+    modelValue: "full-shadow-operator",
     popular: true,
   },
 ];
@@ -60,23 +62,24 @@ export default function CommissionTiers() {
       <div className="container-wide w-full">
         <div className="grid xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <StaggerReveal className="xl:col-span-4">
-            <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider">
-              Partnership Tiers
+            <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider flex items-center gap-1.5 w-fit">
+              <EyeOff className="w-3.5 h-3.5" />
+              <span>Partnership Models</span>
             </span>
             <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
-              Two transparent ways to monetize your existing client relationships
+              Pure Win-Win Revenue Share. Zero Upfront Retainers.
             </h2>
             <p className="text-section leading-relaxed text-slate-400 mb-6">
-              No technical hires. No infrastructure investment. Just fair commercial alignment backed by non-circumvention guarantees.
+              Unlike traditional agencies that charge £5k/month retainers before delivering a single pound of profit, a Shadow Operator only wins when you win.
             </p>
             <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-3 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <Percent className="w-4 h-4 text-rose-400 shrink-0" />
-                <span>Commissions wired within 30 days of client receipt</span>
+                <span>You keep 100% of your current AdSense & brand sponsorships</span>
               </div>
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Protected 90-day deal registration window</span>
+                <span>We only split newly unlocked backend digital revenue</span>
               </div>
             </div>
           </StaggerReveal>
@@ -118,7 +121,7 @@ export default function CommissionTiers() {
 
                     <div className="pt-5 border-t border-white/10">
                       <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-3">
-                        What's Included:
+                        What We Deliver In The Shadows:
                       </span>
                       <ul className="space-y-3">
                         {tier.features.map((feature) => (

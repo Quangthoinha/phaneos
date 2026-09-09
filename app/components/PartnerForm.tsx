@@ -32,10 +32,10 @@ const initialData: FormData = {
 };
 
 const modelOptions = [
-  { value: "", label: "Choose a model" },
-  { value: "referral", label: "Referral — 12% commission" },
-  { value: "co-selling", label: "Co-selling — 25% commission" },
-  { value: "both", label: "Both — decide per client" },
+  { value: "", label: "Select partnership model" },
+  { value: "full-shadow-operator", label: "Full-Stack Shadow Operating — 50/50 Co-Op (Most Popular)" },
+  { value: "rev-share-30", label: "Backend Digital Launch — 70% Creator / 30% Shadow Operator" },
+  { value: "audit-only", label: "Free 7-Minute Shadow Funnel Audit First" },
 ];
 
 function getInitialModel(): string {
@@ -80,21 +80,21 @@ export default function PartnerForm() {
     const next: FormErrors = {};
 
     if (!formData.agency.trim()) {
-      next.agency = "Please enter your agency name";
+      next.agency = "Please enter your channel or brand handle";
     }
 
     if (!formData.name.trim()) {
-      next.name = "Please enter your full name";
+      next.name = "Please enter your name";
     }
 
     if (!formData.email.trim()) {
       next.email = "Please enter your email";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      next.email = "Email should be name@company.com";
+      next.email = "Email should be name@domain.com";
     }
 
     if (!formData.phone.trim()) {
-      next.phone = "Please enter your phone number";
+      next.phone = "Please enter your phone or WhatsApp number";
     } else if (!/^\+?[0-9][0-9\s\-()]{6,18}[0-9]$/.test(formData.phone)) {
       next.phone = "Phone number format is not valid";
     }
@@ -153,13 +153,13 @@ export default function PartnerForm() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <StaggerReveal className="max-w-[55ch]">
             <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider">
-              Fast-Track Application
+              Fast-Track Creator Application
             </span>
             <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
-              Start Co-Selling in 5 Minutes
+              Unlock Your Backend Revenue in 14 Days
             </h2>
             <p className="text-section leading-relaxed text-slate-400 mb-8">
-              Submit your agency details. We will send the full Partner Enablement Pack, non-circumvention draft, and schedule a 15-minute alignment call.
+              Submit your channel metrics below. We will review your recent content, benchmark your niche's top achievers, and deliver a personalized 7-Minute Shadow Operating Blueprint.
             </p>
 
             <div className="space-y-4 text-slate-300">
@@ -167,25 +167,25 @@ export default function PartnerForm() {
                 <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
                   <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>White-label service overviews & decks ready for client meetings</span>
+                <span><strong>Zero Financial Risk:</strong> Pure 20%–50% revenue-share model on newly unlocked revenue. £0 upfront fees.</span>
               </p>
               <p className="flex items-start gap-3 text-sm">
                 <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
                   <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>Pre-written email intro scripts & 1-page fit qualification checklists</span>
+                <span><strong>100% Brand Ownership:</strong> You retain complete control of your IP, subscribers, and community forever.</span>
               </p>
               <p className="flex items-start gap-3 text-sm">
                 <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
                   <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>Senior technical architect joins your very first co-sale call</span>
+                <span><strong>Full Backstage Execution:</strong> We build the 7-minute VSL, sub-60s filter, digital product, and email engines.</span>
               </p>
             </div>
 
             <div className="mt-8 p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-xs text-slate-400 flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-              <span>Response SLA: Every application reviewed within 4 business hours.</span>
+              <span>Response SLA: Every creator audit reviewed and prepared within 24 hours.</span>
             </div>
           </StaggerReveal>
 
@@ -201,7 +201,7 @@ export default function PartnerForm() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="agency" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                      Agency name
+                      Channel or Brand Handle (YouTube / Instagram)
                     </label>
                     <input
                       id="agency"
@@ -209,7 +209,7 @@ export default function PartnerForm() {
                       value={formData.agency}
                       onChange={(e) => updateField("agency", e.target.value)}
                       className={inputClasses("agency")}
-                      placeholder="e.g., Clever Agency"
+                      placeholder="e.g., @JordanPham or youtube.com/@yourchannel"
                       aria-invalid={!!errors.agency}
                       aria-describedby={errors.agency ? "agency-error" : undefined}
                     />
@@ -253,7 +253,7 @@ export default function PartnerForm() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                      Email
+                      Creator / Business Email
                     </label>
                     <input
                       id="email"
@@ -261,7 +261,7 @@ export default function PartnerForm() {
                       value={formData.email}
                       onChange={(e) => updateField("email", e.target.value)}
                       className={inputClasses("email")}
-                      placeholder="you@agency.com"
+                      placeholder="you@yourbrand.com"
                       aria-invalid={!!errors.email}
                       aria-describedby={errors.email ? "email-error" : undefined}
                     />
@@ -278,7 +278,7 @@ export default function PartnerForm() {
 
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                      Phone number
+                      WhatsApp / Phone Number
                     </label>
                     <input
                       id="phone"
@@ -304,7 +304,7 @@ export default function PartnerForm() {
 
                 <div>
                   <label htmlFor="model" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                    Partnership model
+                    Partnership Model Preference
                   </label>
                   <select
                     id="model"
@@ -323,7 +323,7 @@ export default function PartnerForm() {
                     ))}
                   </select>
                   <p id="model-helper" className="mt-1.5 text-sm text-[var(--color-muted)]">
-                    You can change this for each client later. No commitment now.
+                    Zero upfront fees. We only earn when we successfully grow your monthly revenue.
                   </p>
                   {errors.model && (
                     <p
@@ -339,7 +339,7 @@ export default function PartnerForm() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div className="md:col-span-2">
                     <label htmlFor="message" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                      Message
+                      Monthly Views & Backend Monetization Goals
                     </label>
                     <textarea
                       id="message"
@@ -347,13 +347,13 @@ export default function PartnerForm() {
                       value={formData.message}
                       onChange={(e) => updateField("message", e.target.value)}
                       className={inputClasses("message")}
-                      placeholder="How do you want to partner? Any potential clients in mind?"
+                      placeholder="e.g., Averaging 10k–35k views per video. We want to stop relying purely on AdSense and launch our high-margin backend."
                     />
                   </div>
 
                   <div className="md:col-span-2">
                     <label htmlFor="timeToMeet" className="block text-sm font-medium text-[var(--color-ink)] mb-1.5">
-                      Preferred time to meet
+                      Preferred Time for a 15-Min Shadow Strategy Call
                       <span className="text-[var(--color-muted)] font-normal"> — optional</span>
                     </label>
                     <input
@@ -362,10 +362,10 @@ export default function PartnerForm() {
                       value={formData.timeToMeet}
                       onChange={(e) => updateField("timeToMeet", e.target.value)}
                       className={inputClasses("timeToMeet")}
-                      placeholder="e.g., Monday 10:00 AM or 2026-07-01 14:00"
+                      placeholder="e.g., Thursday 2:00 PM EST or ASAP"
                     />
                     <p className="mt-1.5 text-sm text-[var(--color-muted)]">
-                      Let us know a convenient time for a 15-minute intro call.
+                      Pick a time for a 15-minute 1-on-1 walkthrough of your customized shadow blueprint.
                     </p>
                   </div>
                 </div>
@@ -374,10 +374,10 @@ export default function PartnerForm() {
                   type="submit"
                   disabled={status === "loading"}
                   variant="primary"
-                  className="w-full py-4"
+                  className="w-full py-4 text-base font-semibold"
                 >
                   {status === "loading" && <Loader2 size={18} className="animate-spin" />}
-                  {status === "loading" ? "Submitting..." : "Send partner registration"}
+                  {status === "loading" ? "Analyzing your channel..." : "Claim Free Shadow Audit & Apply"}
                 </AnimatedButton>
               </div>
 
@@ -389,11 +389,11 @@ export default function PartnerForm() {
                 }`}>
                   <CheckCircle2 className={`shrink-0 mt-0.5 ${statusMessage ? "text-[var(--color-warning)]" : "text-[var(--color-success)]"}`} size={20} />
                   <div>
-                    <p className="font-medium text-[var(--color-ink)]">Registration received.</p>
+                    <p className="font-medium text-[var(--color-ink)]">Creator Application Received!</p>
                     <p className="text-sm text-[var(--color-muted)]">
                       {statusMessage
                         ? statusMessage
-                        : "We will reply within 24 hours with partner docs and proposed meeting times."}
+                        : "Our shadow operators are analyzing your 10 most recent posts. We will deliver your custom 7-Minute Shadow Operating Blueprint within 24 hours."}
                     </p>
                   </div>
                 </div>

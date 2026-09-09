@@ -7,19 +7,19 @@ import StaggerReveal from "./StaggerReveal";
 
 const steps = [
   {
-    title: "Register as a partner",
+    title: "1. 7-Minute Content & Conversion Audit",
     description:
-      "Fill out the short form. We send partner docs, email templates, and proposed meeting times for the first onboarding call.",
+      "We analyze your 10 most recent posts, inspect your audience drop-off points (naked Calendly links, underpriced digital offers), and benchmark your monetization potential against the Top 1% achievers in your niche.",
   },
   {
-    title: "Introduce your client",
+    title: "2. We Build the Entire Backend (Days 1–10)",
     description:
-      "When you spot an AI opportunity, introduce the client by email or internal form. You choose referral-only or co-sell.",
+      "Zero technical work required from you. In the shadows, we script your 7-minute VSL, build high-converting landing pages, configure 3-question intake qualification filters, and package turnkey AI/Notion digital products.",
   },
   {
-    title: "Earn commission",
+    title: "3. Launch & Split the Profits (Days 11–14+)",
     description:
-      "Commission is paid when the client contract is signed. Co-selling earns 25%; referrals earn 12%. No hidden fees, no complexity.",
+      "You post a 60-second organic shoutout to your community. High-intent buyers enter the automated funnel. Revenue is automatically split at the point of sale via Stripe Connect (50/50 or 70/30). £0 upfront fee, 100% aligned performance.",
   },
 ];
 
@@ -39,11 +39,14 @@ export default function HowItWorks() {
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
         <div className="grid xl:grid-cols-12 gap-12 xl:gap-16">
           <StaggerReveal className="xl:col-span-5">
+            <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider">
+              The 14-Day Deployment Roadmap
+            </span>
             <h2 className="heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
-              Simple enough to start without training
+              From Content Audit to Backend Cashflow in 3 Steps
             </h2>
             <p className="text-section leading-[1.65] text-[var(--color-muted)]">
-              From sign-up to commission in three steps. No heavy onboarding, no complicated reporting.
+              You stay in the spotlight creating what your audience loves. We operate discreetly in the shadows engineering the conversion architecture.
             </p>
           </StaggerReveal>
 

@@ -7,54 +7,44 @@ import StaggerReveal from "./StaggerReveal";
 
 const faqs = [
   {
-    question: "What kind of agency is a good fit?",
+    question: "What exactly is a Shadow Operator?",
     answer:
-      "Agencies that already serve SME to enterprise clients and are fielding questions about AI, automation, or operational efficiency. You do not need an in-house AI team — we provide the enablement, sales material, and delivery expertise.",
+      "A Shadow Operator is your backstage business and monetization partner. You focus 100% of your energy on creating high-value content and building your community. In the shadows, we script your 7-minute VSL, build high-converting landing pages, filter qualified leads in sub-60 seconds, and package turnkey digital products — strictly on a revenue share basis.",
   },
   {
-    question: "What is the difference between referral and co-selling?",
+    question: "Why do you operate on revenue share instead of charging upfront retainers?",
     answer:
-      "Referral (12%): you introduce a warm lead and we handle discovery, proposal, delivery, and billing. Co-selling (25%): we join client meetings and build the proposal together, while you keep the relationship and remain the visible partner throughout.",
+      "Because we have skin in the game. Traditional agencies charge £5,000–£10,000 upfront fees regardless of whether you make a single penny. As a Shadow Operator, we take £0 upfront setup fees. We only win when we successfully unlock new monthly cashflow for your channel.",
   },
   {
-    question: "Does the agency need to understand AI?",
+    question: "Do you touch my existing AdSense, YouTube ad revenue, or brand deals?",
     answer:
-      "No. We provide pitch decks, one-page fit guides, email templates, and join early client calls with you. You only need enough context to spot the opportunity and make a credible introduction.",
+      "Never. You keep 100% of your existing AdSense, brand sponsorships, and merchandise. We only share in the newly engineered backend revenue (VSL conversion funnels, AI digital products, and high-ticket mastermind cohorts) that we build together.",
   },
   {
-    question: "Who owns the client relationship?",
+    question: "What type of creator is the best fit for phaneos?",
     answer:
-      "You do. We never contact your client without your permission, and we do not sell directly to a registered prospect behind your back. The partner agreement includes relationship-protection and non-circumvention clauses for both referral and co-selling deals.",
+      "Micro-creators and niche experts averaging between 1,000 and 20,000 views per video with high viewer trust, but whose content has a cadence hard gate: you must have posted within the last 14–30 days. You have engaged fans, but lack the technical time to build digital products or automated backend funnels.",
   },
   {
-    question: "Will the client know about phaneosAI?",
+    question: "Who owns the audience, community, and intellectual property?",
     answer:
-      "In co-selling, phaneosAI appears as part of the delivery team. In referral deals, we can deliver under your agency brand if you prefer white-label delivery. Either way, the commercial relationship with the client stays with you.",
+      "You do — 100%. You retain exclusive ownership of your social channels, email lists, domain, Stripe account, and brand IP forever. Our bilateral partner agreement includes strict non-circumvention and IP protection terms.",
   },
   {
-    question: "How does deal registration work?",
+    question: "How long does it take from agreement to first launch?",
     answer:
-      "Register a prospect through the partner portal or by email. Once accepted, that deal is protected for 90 days (renewable if actively pursued). If two partners register the same prospect, the first good-faith, complete registration generally wins.",
+      "Our rapid deployment standard is 14 days. We benchmark your niche Top Achievers, script your 7-minute VSL, build the sub-60s qualified intake funnel, package the digital product, and configure Stripe Connect in under two weeks.",
   },
   {
-    question: "When and how is commission paid?",
+    question: "How do payouts and revenue splits work?",
     answer:
-      "Commission is earned when the client contract is signed and the first payment is received. We pay within 30 days after the end of the month in which payment arrives, for the first 12 months of net client fees unless otherwise agreed.",
+      "We configure Stripe Connect or Whop to automatically split incoming customer transactions at the point of sale (e.g. 50/50 or 70/30), ensuring 100% financial transparency. Alternatively, commissions are reconciled on a clear 30-day net ledger.",
   },
   {
-    question: "What happens if a client churns or gets a refund?",
+    question: "What is the difference between 50/50 Co-Op and 70/30 Launch?",
     answer:
-      "If a client payment is refunded or charged back, the commission paid on that amount is subject to clawback and will be offset against future commissions. Fraudulent or self-referral deals are void and may result in termination.",
-  },
-  {
-    question: "How do you handle AI accuracy, hallucinations, and compliance?",
-    answer:
-      "Every client deliverable goes through human review before delivery. We do not use client data to train models, we use zero-data-retention provider tiers where available, and we exclude prohibited and high-risk use cases. Partners and end-clients are responsible for verifying AI outputs before relying on them for consequential decisions.",
-  },
-  {
-    question: "What support do partners get?",
-    answer:
-      "Partner docs, email and pitch-deck templates, shared client calls for your first co-sale, a deal-registration process, and a direct partner contact. You can also request a 15-minute intro call after registering.",
+      "With 50/50 Co-Op (most popular), we build, launch, test, and continuously run your entire backend infrastructure indefinitely. With 70/30, we build and launch your initial digital offer, then hand over the day-to-day workflow after the first 60 days.",
   },
 ];
 
@@ -69,11 +59,14 @@ export default function FAQ() {
     >
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
         <StaggerReveal className="max-w-[65ch] mb-12 md:mb-16">
+          <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider">
+            Clear Alignment & Terms
+          </span>
           <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
-            Questions partners usually ask
+            Frequently Asked Questions
           </h2>
           <p className="section-heading text-section leading-[1.65] text-[var(--color-muted)]">
-            If anything is unclear, send the registration form and we will answer directly.
+            Everything you need to know about partnering with a discreet Shadow Operator.
           </p>
         </StaggerReveal>
         <div className="max-w-[min(92vw,900px)] space-y-4">

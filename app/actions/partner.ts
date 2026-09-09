@@ -148,22 +148,22 @@ async function appendToSheet(data: PartnerRegistrationData) {
 export async function submitPartnerRegistration(data: PartnerRegistrationData) {
   const { agency, name, email, phone, model, message, timeToMeet } = data;
 
-  if (!agency.trim()) return { success: false, error: "Agency name is required" };
-  if (!name.trim()) return { success: false, error: "Full name is required" };
+  if (!agency.trim()) return { success: false, error: "Channel or brand handle is required" };
+  if (!name.trim()) return { success: false, error: "Creator name is required" };
   if (!isValidEmail(email.trim())) return { success: false, error: "A valid email is required" };
-  if (!isValidPhone(phone.trim())) return { success: false, error: "A valid phone number is required" };
+  if (!isValidPhone(phone.trim())) return { success: false, error: "A valid phone or WhatsApp number is required" };
   if (!model) return { success: false, error: "A partnership model is required" };
 
-  const subject = `New partner registration — ${agency}`;
+  const subject = `New Creator Shadow Partnership Application — ${agency}`;
   const html = `
-    <h2>New partner registration</h2>
-    <p><strong>Agency:</strong> ${escapeHtml(agency)}</p>
-    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+    <h2>New Creator Shadow Partnership Application</h2>
+    <p><strong>Channel / Brand:</strong> ${escapeHtml(agency)}</p>
+    <p><strong>Creator Name:</strong> ${escapeHtml(name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-    <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-    <p><strong>Model:</strong> ${escapeHtml(model)}</p>
-    <p><strong>Preferred time to meet:</strong> ${escapeHtml(timeToMeet || "—")}</p>
-    <p><strong>Message:</strong><br/>${escapeHtml(message || "—").replace(/\n/g, "<br/>")}</p>
+    <p><strong>WhatsApp / Phone:</strong> ${escapeHtml(phone)}</p>
+    <p><strong>Model Preference:</strong> ${escapeHtml(model)}</p>
+    <p><strong>Preferred Time for Call:</strong> ${escapeHtml(timeToMeet || "—")}</p>
+    <p><strong>Channel Views & Goals:</strong><br/>${escapeHtml(message || "—").replace(/\n/g, "<br/>")}</p>
   `;
 
   // Always attempt to log to Google Sheets first so registrations are captured
