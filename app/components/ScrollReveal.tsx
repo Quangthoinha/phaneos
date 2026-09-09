@@ -55,16 +55,16 @@ export default function ScrollReveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.01, rootMargin: "150px 0px 50px 0px" }
     );
 
     observer.observe(node);
 
     // Enable transitions after the initial paint so hidden elements can animate in later
-    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 60 : 0);
+    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 40 : 0);
 
     // Safety fallback: never leave content hidden if the observer fails to fire
-    const fallbackTimer = setTimeout(() => setRevealed(true), 1200);
+    const fallbackTimer = setTimeout(() => setRevealed(true), 800);
 
     return () => {
       observer.disconnect();
@@ -73,29 +73,29 @@ export default function ScrollReveal({
     };
   }, [disabled]);
 
-  const staggerDelay = staggerIndex * 0.08;
+  const staggerDelay = staggerIndex * 0.06;
   const totalDelay = delay + staggerDelay;
 
   const baseStyles: React.CSSProperties = {
     opacity: revealed ? 1 : 0,
     transitionProperty: ready ? "opacity, transform, clip-path" : undefined,
-    transitionDuration: ready ? "0.6s" : undefined,
+    transitionDuration: ready ? "0.45s" : undefined,
     transitionTimingFunction: ready ? "cubic-bezier(0.16, 1, 0.3, 1)" : undefined,
     transitionDelay: ready ? `${totalDelay * 1000}ms` : undefined,
   };
 
   const animationStyles: Record<AnimationType, React.CSSProperties> = {
     "fade-up": {
-      transform: revealed ? "translateY(0)" : "translateY(20px)",
+      transform: revealed ? "translateY(0)" : "translateY(12px)",
     },
     "fade-in": {
       transform: "none",
     },
     "scale-up": {
-      transform: revealed ? "translateY(0) scale(1)" : "translateY(16px) scale(0.98)",
+      transform: revealed ? "translateY(0) scale(1)" : "translateY(10px) scale(0.99)",
     },
     "clip-reveal": {
-      transform: revealed ? "translateY(0)" : "translateY(16px)",
+      transform: revealed ? "translateY(0)" : "translateY(10px)",
       clipPath: revealed ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
     },
   };

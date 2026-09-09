@@ -10,17 +10,13 @@ export default function SmoothScroll() {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) return;
 
-    // Initialize Lenis with luxury momentum damping
+    // Initialize Lenis with responsive, low-latency damping (lerp: 0.12)
+    // Instantaneous pickup on wheel/trackpad without floaty overscroll delay
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.2,
+      lerp: 0.12,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
       infinite: false,
-      syncTouch: false, // Preserves 120Hz native touch responsiveness on mobile
     });
 
     lenisRef.current = lenis;
@@ -51,7 +47,7 @@ export default function SmoothScroll() {
           e.preventDefault();
           lenis.scrollTo(element, {
             offset: -76,
-            duration: 1.1,
+            duration: 0.8,
           });
           history.pushState(null, "", href);
         }

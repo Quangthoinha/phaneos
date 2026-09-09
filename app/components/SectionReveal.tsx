@@ -51,16 +51,16 @@ export default function SectionReveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.01, rootMargin: "150px 0px 50px 0px" }
     );
 
     observer.observe(node);
 
     // Enable transitions after the initial paint so hidden elements can animate in.
-    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 60 : 0);
+    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 40 : 0);
 
     // Safety fallback: never leave content hidden if the observer fails to fire.
-    const fallbackTimer = setTimeout(() => setRevealed(true), 1200);
+    const fallbackTimer = setTimeout(() => setRevealed(true), 800);
 
     return () => {
       observer.disconnect();
@@ -69,7 +69,7 @@ export default function SectionReveal({
     };
   }, [shouldReduceMotion]);
 
-  const duration = shouldReduceMotion ? 0.01 : 0.65;
+  const duration = shouldReduceMotion ? 0.01 : 0.45;
   const totalDelay = shouldReduceMotion ? 0 : delay;
 
   return (
@@ -78,7 +78,7 @@ export default function SectionReveal({
       className={className}
       style={{
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(24px)",
+        transform: revealed ? "translateY(0)" : "translateY(12px)",
         transitionProperty: ready ? "opacity, transform" : undefined,
         transitionDuration: ready ? `${duration}s` : undefined,
         transitionDelay: ready ? `${totalDelay}s` : undefined,
