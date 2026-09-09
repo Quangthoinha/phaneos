@@ -139,45 +139,53 @@ export default function PartnerForm() {
   };
 
   const inputClasses = (field: keyof FormData) =>
-    `w-full rounded-md border px-4 py-3 text-base bg-[var(--color-bg)] text-[var(--color-ink)] placeholder:text-[var(--color-muted)] transition-colors focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 ${
-      errors[field] ? "border-[var(--color-error)]" : "border-[var(--color-muted)]/50"
+    `w-full rounded-xl border px-4 py-3.5 text-sm bg-slate-900/80 text-white placeholder:text-slate-500 transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/30 ${
+      errors[field] ? "border-rose-500 ring-2 ring-rose-500/20" : "border-white/10 hover:border-white/20"
     }`;
 
   return (
     <SectionReveal
       id="register"
-      className="relative bg-[var(--color-bg)] flex items-center"
+      className="relative bg-[var(--color-bg)] py-20 md:py-28"
       snap="relaxed"
     >
-      <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
+      <div className="container-wide w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <StaggerReveal className="max-w-[55ch]">
-            <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
-              Start in five minutes
+            <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider">
+              Fast-Track Application
+            </span>
+            <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
+              Start Co-Selling in 5 Minutes
             </h2>
-            <p className="section-heading text-section leading-[1.65] text-[var(--color-muted)] mb-8">
-              Fill out the form. We will send partner docs and propose a meeting if it feels like a fit. No commitment, no hidden fees.
+            <p className="text-section leading-relaxed text-slate-400 mb-8">
+              Submit your agency details. We will send the full Partner Enablement Pack, non-circumvention draft, and schedule a 15-minute alignment call.
             </p>
 
-            <div className="space-y-4 text-[var(--color-muted)]">
-              <p className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary-subtle)] p-1 text-[var(--color-primary)] shrink-0 mt-0.5">
-                  <CheckCircle2 size={16} strokeWidth={3} />
+            <div className="space-y-4 text-slate-300">
+              <p className="flex items-start gap-3 text-sm">
+                <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
+                  <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>Service overview to share with clients</span>
+                <span>White-label service overviews & decks ready for client meetings</span>
               </p>
-              <p className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary-subtle)] p-1 text-[var(--color-primary)] shrink-0 mt-0.5">
-                  <CheckCircle2 size={16} strokeWidth={3} />
+              <p className="flex items-start gap-3 text-sm">
+                <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
+                  <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>Email intro templates and pitch slides</span>
+                <span>Pre-written email intro scripts & 1-page fit qualification checklists</span>
               </p>
-              <p className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary-subtle)] p-1 text-[var(--color-primary)] shrink-0 mt-0.5">
-                  <CheckCircle2 size={16} strokeWidth={3} />
+              <p className="flex items-start gap-3 text-sm">
+                <span className="inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-1 text-emerald-400 shrink-0 mt-0.5">
+                  <CheckCircle2 size={16} strokeWidth={2.5} />
                 </span>
-                <span>1:1 support on your first co-sale</span>
+                <span>Senior technical architect joins your very first co-sale call</span>
               </p>
+            </div>
+
+            <div className="mt-8 p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-xs text-slate-400 flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+              <span>Response SLA: Every application reviewed within 4 business hours.</span>
             </div>
           </StaggerReveal>
 
@@ -185,7 +193,7 @@ export default function PartnerForm() {
             <form
               id="partner-form"
               onSubmit={handleSubmit}
-              className="bg-[var(--color-surface)] rounded-xl p-6 md:p-8"
+              className="glass-card rounded-3xl p-7 md:p-10 border border-white/10 shadow-2xl relative"
               aria-label="Register as a partner"
               noValidate
             >

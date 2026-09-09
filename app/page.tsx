@@ -1,7 +1,9 @@
 import SmoothScroll from "./components/SmoothScroll";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import CommissionCalculator from "./components/CommissionCalculator";
 import CommissionTiers from "./components/CommissionTiers";
+import ModelComparisonMatrix from "./components/ModelComparisonMatrix";
 import HowItWorks from "./components/HowItWorks";
 import Services from "./components/Services";
 import Trust from "./components/Trust";
@@ -90,7 +92,9 @@ export default function Home() {
         className="outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-inset"
       >
         <Hero />
+        <CommissionCalculator />
         <CommissionTiers />
+        <ModelComparisonMatrix />
         <HowItWorks />
         <Services />
         <Trust />

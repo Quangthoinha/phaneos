@@ -7,11 +7,12 @@ import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 
 const navLinks = [
-  { href: "#benefits", label: "Benefits" },
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#services", label: "Services" },
+  { href: "#calculator", label: "ROI Calculator" },
+  { href: "#benefits", label: "Commission Tiers" },
+  { href: "#comparison", label: "Why Co-Sell" },
+  { href: "#services", label: "Capabilities" },
+  { href: "#trust", label: "Trust & Legal" },
   { href: "#faq", label: "FAQ" },
-  { href: "/legal", label: "Legal" },
 ];
 
 const SCROLL_UP_REVEAL_THRESHOLD = 8;
@@ -139,7 +140,7 @@ export default function Header() {
   return (
     <motion.header
       ref={headerRef}
-      className="fixed top-0 left-0 right-0 h-[var(--header-height)] bg-white border-b border-[var(--color-muted)]/10 shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
+      className="fixed top-0 left-0 right-0 h-[var(--header-height)] backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
       initial={false}
       animate={{
         y: hidden ? "-100%" : "0%",
@@ -151,7 +152,8 @@ export default function Header() {
       style={{
         transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
         zIndex: 99999,
-        backgroundColor: "#ffffff",
+        backgroundColor: "rgba(10, 14, 23, 0.85)",
+        backdropFilter: "blur(20px)",
         position: "fixed",
         top: 0,
         left: 0,
@@ -241,8 +243,8 @@ export default function Header() {
                 duration: shouldReduceMotion ? 0.01 : 0.25,
                 ease: [0.25, 1, 0.5, 1],
               }}
-              className="md:hidden fixed top-[var(--header-height)] left-0 right-0 bg-white border-b border-[var(--color-muted)]/10 shadow-[0_12px_24px_-8px_var(--color-shadow)]"
-              style={{ zIndex: 99998, backgroundColor: "#ffffff" }}
+              className="md:hidden fixed top-[var(--header-height)] left-0 right-0 backdrop-blur-2xl border-b border-white/10 shadow-2xl"
+              style={{ zIndex: 99998, backgroundColor: "rgba(10, 14, 23, 0.95)" }}
             >
               <nav
                 className="container-wide py-6 flex flex-col gap-2"
