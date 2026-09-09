@@ -63,21 +63,31 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
-  scroll-snap-type: y proximity;
+  touch-action: pan-y;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Full-viewport snap sections */
-.snap-section {
-  min-height: 100dvh;
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
+/* Lenis smooth scroll standard styling */
+html.lenis, html.lenis body {
+  height: auto;
 }
 
-/* Sections that need more breathing room can opt out of strict snapping */
-.snap-section--relaxed {
-  scroll-snap-align: none;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 /* Fluid, non-fixed content containers */

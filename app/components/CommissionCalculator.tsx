@@ -26,7 +26,12 @@ export default function CommissionCalculator() {
 
     const form = document.getElementById("register");
     if (form) {
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (target: HTMLElement, options: object) => void } }).__lenis;
+      if (lenis) {
+        lenis.scrollTo(form, { offset: -76, duration: 1.1 });
+      } else {
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 
@@ -102,7 +107,7 @@ export default function CommissionCalculator() {
                   Monthly Video / Content Views:
                 </label>
                 <span className="text-lg font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">
-                  {viewsCount.toLocaleString()} views
+                  {viewsCount.toLocaleString("en-GB")} views
                 </span>
               </div>
               <input
@@ -158,12 +163,12 @@ export default function CommissionCalculator() {
                 Your Take-Home Monthly Cash ({model === "full" ? "50%" : "70%"} Split)
               </span>
               <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-100 to-rose-400">
-                +£{Math.round(creatorTake).toLocaleString()}
+                +£{Math.round(creatorTake).toLocaleString("en-GB")}
                 <span className="text-base md:text-lg font-normal text-slate-400 ml-2">/month</span>
               </div>
               <p className="text-xs text-slate-400 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-                <span>• Total Unlocked Backend: <strong className="text-slate-200">£{Math.round(totalMonthlyBackend).toLocaleString()}/mo</strong></span>
-                <span>• Shadow Operator Share: <strong className="text-slate-300">£{Math.round(operatorTake).toLocaleString()}/mo</strong></span>
+                <span>• Total Unlocked Backend: <strong className="text-slate-200">£{Math.round(totalMonthlyBackend).toLocaleString("en-GB")}/mo</strong></span>
+                <span>• Shadow Operator Share: <strong className="text-slate-300">£{Math.round(operatorTake).toLocaleString("en-GB")}/mo</strong></span>
                 <span>• Upfront Cost to Creator: <strong className="text-emerald-400">£0</strong></span>
               </p>
             </div>

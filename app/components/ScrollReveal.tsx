@@ -55,16 +55,16 @@ export default function ScrollReveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.12, rootMargin: "-60px 0px -60px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
     );
 
     observer.observe(node);
 
     // Enable transitions after the initial paint so hidden elements can animate in later
-    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 80 : 0);
+    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 60 : 0);
 
     // Safety fallback: never leave content hidden if the observer fails to fire
-    const fallbackTimer = setTimeout(() => setRevealed(true), 1500);
+    const fallbackTimer = setTimeout(() => setRevealed(true), 1200);
 
     return () => {
       observer.disconnect();
@@ -73,30 +73,29 @@ export default function ScrollReveal({
     };
   }, [disabled]);
 
-  const staggerDelay = staggerIndex * 0.12;
+  const staggerDelay = staggerIndex * 0.08;
   const totalDelay = delay + staggerDelay;
 
   const baseStyles: React.CSSProperties = {
-    willChange: ready ? "opacity, transform" : undefined,
     opacity: revealed ? 1 : 0,
     transitionProperty: ready ? "opacity, transform, clip-path" : undefined,
-    transitionDuration: ready ? "0.9s" : undefined,
-    transitionTimingFunction: ready ? "cubic-bezier(0.22, 1, 0.36, 1)" : undefined,
+    transitionDuration: ready ? "0.6s" : undefined,
+    transitionTimingFunction: ready ? "cubic-bezier(0.16, 1, 0.3, 1)" : undefined,
     transitionDelay: ready ? `${totalDelay * 1000}ms` : undefined,
   };
 
   const animationStyles: Record<AnimationType, React.CSSProperties> = {
     "fade-up": {
-      transform: revealed ? "translateY(0)" : "translateY(48px)",
+      transform: revealed ? "translateY(0)" : "translateY(20px)",
     },
     "fade-in": {
       transform: "none",
     },
     "scale-up": {
-      transform: revealed ? "translateY(0) scale(1)" : "translateY(40px) scale(0.96)",
+      transform: revealed ? "translateY(0) scale(1)" : "translateY(16px) scale(0.98)",
     },
     "clip-reveal": {
-      transform: revealed ? "translateY(0)" : "translateY(32px)",
+      transform: revealed ? "translateY(0)" : "translateY(16px)",
       clipPath: revealed ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
     },
   };

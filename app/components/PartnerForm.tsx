@@ -47,10 +47,7 @@ function getInitialModel(): string {
 }
 
 export default function PartnerForm() {
-  const [formData, setFormData] = useState<FormData>(() => ({
-    ...initialData,
-    model: getInitialModel(),
-  }));
+  const [formData, setFormData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState<string>("");

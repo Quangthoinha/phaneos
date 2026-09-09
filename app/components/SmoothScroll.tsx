@@ -8,33 +8,66 @@ export default function SmoothScroll() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery.matches) return;
 
-    // CSS scroll-snap takes priority; Lenis interferes with native snap behavior
-    const hasScrollSnap =
-      window.getComputedStyle(document.documentElement).scrollSnapType !== "none";
-
-    if (mediaQuery.matches || hasScrollSnap) return;
-
+    // Initialize Lenis with luxury momentum damping
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 1.15,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 1.5,
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.2,
       infinite: false,
-      syncTouch: true,
+      syncTouch: false, // Preserves 120Hz native touch responsiveness on mobile
     });
 
     lenisRef.current = lenis;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    // Expose instance for programmatic navigation
+    if (typeof window !== "undefined") {
+      (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
     }
 
-    requestAnimationFrame(raf);
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    // Smoothly glide to anchor targets on internal link clicks
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest("a");
+      if (!target) return;
+
+      const href = target.getAttribute("href");
+      if (href && href.startsWith("#") && href.length > 1) {
+        const id = href.slice(1);
+        const element = document.getElementById(id);
+        if (element) {
+          e.preventDefault();
+          lenis.scrollTo(element, {
+            offset: -76,
+            duration: 1.1,
+          });
+          history.pushState(null, "", href);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
 
     return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== "undefined") {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis;
+      }
     };
   }, []);
 

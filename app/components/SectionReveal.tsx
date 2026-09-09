@@ -51,16 +51,16 @@ export default function SectionReveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.15, rootMargin: "-40px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
     );
 
     observer.observe(node);
 
     // Enable transitions after the initial paint so hidden elements can animate in.
-    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 80 : 0);
+    const readyTimer = setTimeout(() => setReady(true), hiddenInitially ? 60 : 0);
 
     // Safety fallback: never leave content hidden if the observer fails to fire.
-    const fallbackTimer = setTimeout(() => setRevealed(true), 1500);
+    const fallbackTimer = setTimeout(() => setRevealed(true), 1200);
 
     return () => {
       observer.disconnect();
@@ -69,28 +69,20 @@ export default function SectionReveal({
     };
   }, [shouldReduceMotion]);
 
-  const snapClass =
-    snap === false
-      ? ""
-      : snap === "relaxed"
-      ? "snap-section snap-section--relaxed"
-      : "snap-section";
-
-  const duration = shouldReduceMotion ? 0.01 : 0.8;
+  const duration = shouldReduceMotion ? 0.01 : 0.65;
   const totalDelay = shouldReduceMotion ? 0 : delay;
 
   return (
     <section
       ref={ref}
-      className={`${snapClass} ${className}`}
+      className={className}
       style={{
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(48px)",
+        transform: revealed ? "translateY(0)" : "translateY(24px)",
         transitionProperty: ready ? "opacity, transform" : undefined,
         transitionDuration: ready ? `${duration}s` : undefined,
         transitionDelay: ready ? `${totalDelay}s` : undefined,
-        transitionTimingFunction: ready ? "cubic-bezier(0.22, 1, 0.36, 1)" : undefined,
-        willChange: ready ? "opacity, transform" : undefined,
+        transitionTimingFunction: ready ? "cubic-bezier(0.16, 1, 0.3, 1)" : undefined,
       }}
       {...props}
     >
