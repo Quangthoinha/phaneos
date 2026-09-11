@@ -1,22 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Sparkles, Terminal, ShieldCheck } from "lucide-react";
-import { BorderBeam } from "./ui/BorderBeam";
+import { ArrowRight, Calculator, Check } from "lucide-react";
 
 export default function CalculatorSection() {
-  const [viewsCount, setViewsCount] = useState<number>(35000);
+  const [viewsCount, setViewsCount] = useState<number>(30000);
   const [offerPrice, setOfferPrice] = useState<number>(297);
-  const [model, setModel] = useState<"standard" | "full">("standard");
 
-  // Heuristic conversion rate on optimized VSL funnel: 0.8% of engaged viewers
-  const conversionRate = 0.008;
-  const monthlyBuyers = Math.max(2, Math.round(viewsCount * conversionRate * 0.25));
-  const totalMonthlyBackend = monthlyBuyers * offerPrice;
-  const operatorSplit = model === "full" ? 0.5 : 0.3;
-  const creatorTake = totalMonthlyBackend * (1 - operatorSplit);
+  // Realistic conversion: ~0.8% of engaged viewers reach offer, 25% purchase = 0.2% net conversion on views
+  const estimatedBuyers = Math.max(2, Math.round(viewsCount * 0.002));
+  const totalRevenue = estimatedBuyers * offerPrice;
+  const creatorEarnings = totalRevenue * 0.7; // 70% to creator
+  const phaneosShare = totalRevenue * 0.3; // 30% to operator
 
-  const handleCtaClick = () => {
+  const handleApplyClick = () => {
     if (typeof window === "undefined") return;
     const form = document.getElementById("register");
     if (form) {
@@ -25,164 +22,128 @@ export default function CalculatorSection() {
   };
 
   return (
-    <section id="calculator" className="py-24 px-6 md:px-12 bg-[#05070a] relative overflow-hidden">
+    <section id="calculator" className="py-24 px-6 md:px-12 bg-[#090a0f] border-t border-white/5">
       <div className="max-w-4xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono uppercase tracking-widest text-amber-400 mb-3">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>[SYNDICATE_LEDGER // REV_SHARE_SIMULATOR]</span>
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-xs font-mono uppercase tracking-wider text-rose-400 mb-3">
+            Revenue Estimator
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
-            Model Your Backend Cashflow
+            How Much Could Your Channel Earn?
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Plug your audience metrics into our economics engine to simulate the monthly cashflow unlocked by a high-ticket VSL and qualification funnel.
+            YouTube AdSense pays roughly £3–£5 per 1,000 views. When you introduce a high-converting digital product or service, even a tiny 0.2% buyer conversion turns your views into serious recurring cashflow.
           </p>
         </div>
 
-        {/* Syndicate Terminal Card */}
-        <div className="relative rounded-3xl bg-[#090c12] border border-white/10 p-6 sm:p-10 backdrop-blur-xl shadow-2xl overflow-hidden">
-          <BorderBeam size={320} duration={14} colorFrom="#f59e0b" colorTo="#e11d48" />
-
-          {/* Model Toggle */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 border-b border-white/10">
-            <div>
-              <span className="text-xs uppercase tracking-widest font-mono text-slate-400 block mb-1">
-                [OPERATIONAL_FRAMEWORK]
-              </span>
-              <p className="text-sm font-medium text-white">
-                {model === "standard"
-                  ? "Backend Launch Mandate (70% Creator / 30% Shadow Operator)"
-                  : "Full-Stack Sovereign Co-Op (50/50 Co-Operating Partner)"}
-              </p>
-            </div>
-
-            <div className="flex items-center p-1 rounded-xl bg-black border border-white/10 font-mono text-xs">
-              <button
-                type="button"
-                onClick={() => setModel("standard")}
-                className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
-                  model === "standard"
-                    ? "bg-amber-500 text-black font-bold shadow-md shadow-amber-950/40"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                70/30 Mandate
-              </button>
-              <button
-                type="button"
-                onClick={() => setModel("full")}
-                className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
-                  model === "full"
-                    ? "bg-amber-500 text-black font-bold shadow-md shadow-amber-950/40"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                50/50 Co-Op
-              </button>
-            </div>
-          </div>
-
+        {/* Calculator Card */}
+        <div className="rounded-3xl bg-[#0f1219] border border-white/10 p-6 sm:p-10 shadow-2xl">
           {/* Sliders Grid */}
-          <div className="grid md:grid-cols-2 gap-8 py-8">
-            {/* Slider 1: Views Count */}
+          <div className="grid md:grid-cols-2 gap-10 pb-10 border-b border-white/10">
+            {/* Slider 1: Views */}
             <div>
               <div className="flex justify-between items-center mb-3">
-                <label htmlFor="views-range" className="text-xs font-mono uppercase tracking-wider text-slate-300">
-                  [MONTHLY_VIEWS]
+                <label htmlFor="calc-views" className="text-sm font-semibold text-slate-200">
+                  Average Monthly Video Views:
                 </label>
-                <span className="text-sm font-mono font-bold text-white px-2.5 py-1 rounded bg-white/5 border border-white/10">
-                  {viewsCount.toLocaleString("en-GB")} views
+                <span className="text-base font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10 font-mono">
+                  {viewsCount.toLocaleString("en-GB")}
                 </span>
               </div>
               <input
-                id="views-range"
+                id="calc-views"
                 type="range"
                 min="5000"
-                max="250000"
+                max="150000"
                 step="5000"
                 value={viewsCount}
                 onChange={(e) => setViewsCount(Number(e.target.value))}
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                className="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500"
               />
-              <div className="flex justify-between text-xs font-mono text-slate-500 mt-2">
+              <div className="flex justify-between text-xs text-slate-500 mt-2 font-mono">
                 <span>5k</span>
-                <span>100k</span>
-                <span>250k</span>
+                <span>75k</span>
+                <span>150k</span>
               </div>
             </div>
 
-            {/* Slider 2: Offer Ticket Price */}
+            {/* Slider 2: Product Price */}
             <div>
               <div className="flex justify-between items-center mb-3">
-                <label htmlFor="price-range" className="text-xs font-mono uppercase tracking-wider text-slate-300">
-                  [ASSET_TICKET_SIZE]
+                <label htmlFor="calc-price" className="text-sm font-semibold text-slate-200">
+                  Target Product / Offer Price:
                 </label>
-                <span className="text-sm font-mono font-bold text-amber-400 px-2.5 py-1 rounded bg-white/5 border border-white/10">
+                <span className="text-base font-bold text-rose-400 px-3 py-1 rounded-lg bg-white/5 border border-white/10 font-mono">
                   £{offerPrice}
                 </span>
               </div>
               <input
-                id="price-range"
+                id="calc-price"
                 type="range"
                 min="97"
-                max="1997"
+                max="997"
                 step="50"
                 value={offerPrice}
                 onChange={(e) => setOfferPrice(Number(e.target.value))}
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                className="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500"
               />
-              <div className="flex justify-between text-xs font-mono text-slate-500 mt-2">
-                <span>£97 (Blueprint)</span>
-                <span>£497 (Course)</span>
-                <span>£1,997 (Cohort)</span>
+              <div className="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                <span>£97 (Template / Guide)</span>
+                <span>£297 (System)</span>
+                <span>£997 (Cohort)</span>
               </div>
             </div>
           </div>
 
-          {/* Results Summary Box */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-black border border-white/10 grid sm:grid-cols-3 gap-6 text-center sm:text-left mb-8 font-mono">
+          {/* Results Display */}
+          <div className="py-8 grid sm:grid-cols-3 gap-6 text-center sm:text-left">
             <div>
-              <span className="text-xs text-slate-500 uppercase tracking-widest block mb-1">
-                [EST_MONTHLY_BUYERS]
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-1">
+                Estimated Monthly Sales
               </span>
-              <div className="text-2xl font-bold text-white">
-                ~{monthlyBuyers} <span className="text-xs font-normal text-slate-500">acquisitions</span>
+              <div className="text-2xl sm:text-3xl font-bold text-white font-mono">
+                ~{estimatedBuyers} <span className="text-xs font-normal text-slate-400">customers</span>
               </div>
             </div>
 
             <div>
-              <span className="text-xs text-slate-500 uppercase tracking-widest block mb-1">
-                [TOTAL_GROSS_REVENUE]
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-1">
+                Total Monthly Revenue
               </span>
-              <div className="text-2xl font-bold text-slate-300">
-                £{totalMonthlyBackend.toLocaleString("en-GB")}
+              <div className="text-2xl sm:text-3xl font-bold text-slate-300 font-mono">
+                £{totalRevenue.toLocaleString("en-GB")}
               </div>
             </div>
 
             <div className="sm:border-l sm:border-white/10 sm:pl-6">
-              <span className="text-xs text-amber-400 uppercase tracking-widest block mb-1">
-                [CREATOR_TAKE_HOME]
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 block mb-1">
+                Your Take-Home (70%)
               </span>
-              <div className="text-3xl font-extrabold text-amber-400">
-                £{Math.round(creatorTake).toLocaleString("en-GB")}
-                <span className="text-xs text-slate-400 font-normal block mt-1">
-                  ({Math.round((1 - operatorSplit) * 100)}% via Stripe Connect)
-                </span>
+              <div className="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono">
+                £{Math.round(creatorEarnings).toLocaleString("en-GB")}
               </div>
+              <span className="text-xs text-slate-400 mt-1 block">
+                Paid directly into your Stripe account
+              </span>
             </div>
           </div>
 
-          {/* Action Button */}
-          <button
-            type="button"
-            onClick={handleCtaClick}
-            className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-mono font-bold text-sm tracking-wider uppercase transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-950/40"
-          >
-            <span>[INITIATE CONFIDENTIAL PARTNER AUDIT]</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* Bottom Callout */}
+          <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-xs text-slate-300">
+              <strong className="text-white">Zero upfront cost:</strong> We build the funnel, product framework, and tech for free. We only earn our 30% cut when you make sales.
+            </div>
+
+            <button
+              type="button"
+              onClick={handleApplyClick}
+              className="w-full sm:w-auto px-6 py-3 rounded-lg bg-rose-500 hover:bg-rose-600 text-white font-semibold text-xs whitespace-nowrap transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0"
+            >
+              <span>See If Your Channel Qualifies</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

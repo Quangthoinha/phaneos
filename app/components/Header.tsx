@@ -7,10 +7,9 @@ import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 
 const navLinks = [
-  { href: "#dossier", label: "01. Dossier" },
-  { href: "#calculator", label: "02. Simulator" },
-  { href: "#engines", label: "03. Engines" },
-  { href: "#model", label: "04. Charter" },
+  { href: "#how-it-works", label: "How It Works" },
+  { href: "#calculator", label: "Revenue Calculator" },
+  { href: "#model", label: "Why Rev-Share" },
   { href: "#faq", label: "FAQ" },
 ];
 

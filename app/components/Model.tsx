@@ -1,132 +1,114 @@
 "use client";
 
-import { ShieldCheck, Award, Lock, FileCheck } from "lucide-react";
+import { Check, X, Shield, Lock, Award, Zap } from "lucide-react";
 
 const comparisonRows = [
   {
-    dimension: "Upfront Investment",
-    agency: "£3,000 – £10,000 / month",
-    course: "$497 – $1,997 one-time fee",
-    phaneos: "£0.00 (Zero). We invest upfront.",
+    feature: "Upfront Cost",
+    agency: "£3,000 – £8,000 / month",
+    diy: "$497 – $1,997 one-off course",
+    phaneos: "£0 (Zero). We invest upfront.",
   },
   {
-    dimension: "Incentive Alignment",
-    agency: "Bills hourly retainers whether you make £0 or £100k",
-    course: "Platform profits at moment of sale",
-    phaneos: "Pure rev-share: we only profit when you get paid",
+    feature: "Incentive Alignment",
+    agency: "They get paid whether you make £0 or £50k",
+    diy: "The guru profits when you buy the course",
+    phaneos: "Pure rev-share: we only profit when you make sales",
   },
   {
-    dimension: "Execution Burden",
-    agency: "You manage, review, and babysit account managers",
-    course: "100% of curriculum build falls on you",
-    phaneos: "Backstage execution: we script, build, wire & operate",
+    feature: "Who Does The Heavy Lifting",
+    agency: "You manage them and approve countless drafts",
+    diy: "100% on your shoulders to build and fix tech",
+    phaneos: "We build, write, wire, and test everything",
   },
   {
-    dimension: "Audience & IP Ownership",
-    agency: "Often locked into proprietary agency hosting",
-    course: "Platform owns audience data & customer relationship",
-    phaneos: "100% Creator owned in perpetuity (channels, list, IP)",
+    feature: "IP & Audience Ownership",
+    agency: "Often tied to proprietary agency funnels",
+    diy: "Course platform owns your student data",
+    phaneos: "100% Creator owned forever (channel, list, IP)",
   },
   {
-    dimension: "Deployment Standard",
-    agency: "60 – 90 days of onboarding alignment meetings",
-    course: "Indefinite DIY procrastination",
+    feature: "Launch Speed",
+    agency: "60 – 90 days of onboarding meetings",
+    diy: "Indefinite procrastination",
     phaneos: "14-Day deployment standard",
   },
 ];
 
-const covenants = [
+const guarantees = [
   {
-    code: "COVENANT_01",
-    title: "100% Sovereign IP & Audience Title",
-    description:
-      "You retain permanent, exclusive ownership of your YouTube channel, social accounts, email list, community, and intellectual property. No shared equity, no lock-in clauses.",
+    title: "100% Creator Ownership",
+    desc: "You retain exclusive ownership of your YouTube channel, social accounts, email list, community, and intellectual property. No shared equity, no lock-in.",
   },
   {
-    code: "COVENANT_02",
-    title: "Zero Retainers in Perpetuity",
-    description:
-      "We never invoice for consulting, software integrations, or advisory hours. Our compensation is strictly a minority split of newly unlocked backend cashflow.",
+    title: "Zero Retainers, Ever",
+    desc: "We never invoice for hours, software setups, or consulting. Our compensation is strictly a 30% cut of newly unlocked revenue generated through the systems we build.",
   },
   {
-    code: "COVENANT_03",
-    title: "Covert Shadow Operating Mandate",
-    description:
-      "We operate invisibly. Your audience sees only your authentic voice, face, and methodology. We never plaster our agency logo over your brand or digital assets.",
+    title: "Hands-Off Execution",
+    desc: "You record the video and provide your subject-matter expertise. We handle copywriting, landing page design, checkout integration, and automated fulfillment.",
   },
   {
-    code: "COVENANT_04",
-    title: "Audience Reputation Protection",
-    description:
-      "We refuse high-pressure countdown timers, fake scarcity, and low-grade offers. Every backend asset engineered must strengthen your audience's long-term trust.",
+    title: "Protected Audience Trust",
+    desc: "We refuse high-pressure sales tactics, fake countdown timers, or scammy offers. Everything we build is designed to strengthen your long-term reputation with your community.",
   },
 ];
 
 export default function Model() {
   return (
-    <section id="model" className="py-24 px-6 md:px-12 bg-[#05070a] border-t border-white/5 relative">
+    <section id="model" className="py-24 px-6 md:px-12 bg-[#090a0f] border-t border-white/5">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono uppercase tracking-widest text-amber-400 mb-3">
-              <FileCheck className="w-3.5 h-3.5" />
-              <span>[BILATERAL_FRAMEWORK // THE_CHARTER]</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
-              Aligned Incentives. Zero Retainers.
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Traditional agencies profit even when creators fail. We rejected that model to operate as a true backstage syndicate.
-            </p>
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-xs font-mono uppercase tracking-wider text-rose-400 mb-3">
+            Pure Alignment
           </div>
-
-          <div className="confidential-stamp">
-            <span>SOVEREIGN CO-OP GUARANTEE</span>
-          </div>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+            Why Revenue Share is Better Than an Agency
+          </h2>
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Agencies charge you thousands every month regardless of whether you make a single penny. We take on the financial risk ourselves: we only make money when you do.
+          </p>
         </div>
 
-        {/* Comparison Matrix */}
-        <div className="overflow-x-auto mb-20 pb-4">
-          <table className="w-full text-left text-sm border-collapse">
+        {/* Comparison Table */}
+        <div className="overflow-x-auto mb-20">
+          <table className="w-full text-left text-sm border-collapse rounded-2xl overflow-hidden">
             <thead>
-              <tr className="border-b border-white/10 text-slate-400 font-mono text-xs uppercase tracking-wider">
-                <th className="py-4 pr-6 font-normal">[DIMENSION]</th>
+              <tr className="border-b border-white/10 text-slate-400 font-mono text-xs uppercase tracking-wider bg-white/[0.02]">
+                <th className="py-4 px-6 font-semibold">Comparison</th>
                 <th className="py-4 px-6 font-normal">Traditional Agency</th>
-                <th className="py-4 px-6 font-normal">DIY Course Guru</th>
-                <th className="py-4 pl-6 font-bold text-amber-400">phaneos Shadow Partner</th>
+                <th className="py-4 px-6 font-normal">DIY Course / Alone</th>
+                <th className="py-4 px-6 font-bold text-rose-400 bg-rose-500/5">phaneos Partnership</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-slate-300 font-sans">
+            <tbody className="divide-y divide-white/5 text-slate-300">
               {comparisonRows.map((row, idx) => (
                 <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-4 pr-6 font-medium text-white font-mono text-xs">{row.dimension}</td>
+                  <td className="py-4 px-6 font-medium text-white">{row.feature}</td>
                   <td className="py-4 px-6 text-slate-400">{row.agency}</td>
-                  <td className="py-4 px-6 text-slate-400">{row.course}</td>
-                  <td className="py-4 pl-6 text-emerald-400 font-medium">{row.phaneos}</td>
+                  <td className="py-4 px-6 text-slate-400">{row.diy}</td>
+                  <td className="py-4 px-6 text-emerald-400 font-semibold bg-rose-500/5">{row.phaneos}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* 4 Covenants Grid */}
-        <div className="pt-16 border-t border-white/10">
-          <div className="text-xs font-mono uppercase tracking-widest text-amber-400 mb-8">
-            [THE_FOUR_SOVEREIGN_COVENANTS]
-          </div>
+        {/* 4 Guarantees */}
+        <div className="pt-12 border-t border-white/10">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-8 text-center sm:text-left">
+            Our 4 Core Commitments to Every Creator
+          </h3>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {covenants.map((c, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-[#090c12] border border-white/5 hover:border-amber-500/30 transition-colors space-y-2.5"
-              >
-                <div className="text-xs font-mono text-amber-400/80">[{c.code}]</div>
+            {guarantees.map((g, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-[#0f1219] border border-white/5 space-y-2">
                 <h4 className="text-base font-bold text-white tracking-tight">
-                  {c.title}
+                  {g.title}
                 </h4>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  {c.description}
+                  {g.desc}
                 </p>
               </div>
             ))}

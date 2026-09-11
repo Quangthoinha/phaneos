@@ -10,9 +10,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { href: "#thesis", label: "The Dilemma" },
-    { href: "#engines", label: "Backend Engines" },
-    { href: "#model", label: "The Model" },
+    { href: "#how-it-works", label: "How It Works" },
+    { href: "#calculator", label: "Revenue Calculator" },
+    { href: "#model", label: "Why Rev-Share" },
     { href: "#faq", label: "FAQ" },
     { href: "/legal", label: "Legal" },
   ];
