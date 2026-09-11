@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Sparkles, ArrowRight, ShieldCheck, Zap, Lock, EyeOff, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
 const contentVariants = {
@@ -62,15 +62,6 @@ export default function Hero() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* Top Live Pill */}
-          <motion.div
-            variants={shouldReduceMotion ? undefined : itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 mb-8 backdrop-blur-md shadow-sm"
-          >
-            <EyeOff className="w-3.5 h-3.5 text-rose-400" />
-            <span>2026 Shadow Operating Model — Accepting 5 Select Creators & Experts</span>
-          </motion.div>
-
           {/* Master Headline */}
           <motion.h1
             variants={shouldReduceMotion ? undefined : itemVariants}
@@ -87,18 +78,18 @@ export default function Hero() {
             variants={shouldReduceMotion ? undefined : itemVariants}
             className="text-[clamp(1.125rem,1.4vw,1.35rem)] leading-[1.65] text-slate-300 mb-10 max-w-2xl mx-auto text-pretty font-normal"
           >
-            Stop leaking 40% of your audience to naked Calendly links and text-heavy pages. We architect high-converting 7-minute VSL funnels, turnkey AI digital products, and automated backend lead engines — on a pure <strong>20% – 50% revenue share split</strong>.
+            Most creators leak 40% of their audience to naked Calendly links and text-heavy pages. We engineer high-converting 7-minute VSL funnels, turnkey digital products, and automated backend lead engines — on a pure <strong>20% – 50% revenue share split</strong> with zero upfront retainers.
           </motion.p>
 
           {/* Interactive CTAs */}
           <motion.div
             variants={shouldReduceMotion ? undefined : itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
           >
             <button
               type="button"
               onClick={() => handleScrollTo("calculator")}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-semibold text-base flex items-center justify-center gap-2.5 shadow-xl shadow-rose-950/50 hover:shadow-rose-900/60 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-semibold text-base flex items-center justify-center gap-2.5 transition-colors cursor-pointer"
             >
               <span>Calculate Unlocked Revenue</span>
               <ArrowRight className="w-4 h-4" />
@@ -107,66 +98,44 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => handleScrollTo("register")}
-              className="w-full sm:w-auto px-7 py-4 rounded-xl glass-card text-white font-semibold text-base flex items-center justify-center gap-2 hover:bg-white/10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto px-7 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700 font-semibold text-base flex items-center justify-center gap-2 transition-colors cursor-pointer"
             >
               <PlayCircle className="w-4 h-4 text-rose-400" />
               <span>Get Free Shadow Audit</span>
             </button>
           </motion.div>
 
-          {/* 3 Tactile Proof Cards (Apple Glassmorphic Style) */}
+          {/* Executive Proof Bar */}
           <motion.div
             variants={shouldReduceMotion ? undefined : itemVariants}
-            className="grid sm:grid-cols-3 gap-4 text-left max-w-3xl mx-auto"
+            className="border-y border-white/10 py-6 max-w-4xl mx-auto grid sm:grid-cols-3 gap-6 text-left"
           >
-            <div className="glass-card rounded-2xl p-5 border border-white/10 flex items-start gap-3.5">
-              <div className="p-2 rounded-xl bg-rose-500/10 text-rose-400 shrink-0 mt-0.5">
-                <Zap className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">20% – 50% Rev-Share</h2>
-                <p className="text-xs text-slate-400">Zero upfront fees. We only earn when we grow your monthly revenue.</p>
-              </div>
+            <div className="sm:border-r sm:border-white/10 sm:pr-6">
+              <span className="text-xs uppercase tracking-wider font-semibold text-rose-400 block mb-1">
+                Zero Upfront Risk
+              </span>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Pure 20%–50% revenue share. We invest our own time and engineering; we only earn when you make money.
+              </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-5 border border-white/10 flex items-start gap-3.5">
-              <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 shrink-0 mt-0.5">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">100% Brand Ownership</h2>
-                <p className="text-xs text-slate-400">Your audience, content, and IP remain 100% yours forever.</p>
-              </div>
+            <div className="sm:border-r sm:border-white/10 sm:pr-6">
+              <span className="text-xs uppercase tracking-wider font-semibold text-emerald-400 block mb-1">
+                Zero Technical Overhead
+              </span>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                You record your content. We script, build, wire, and manage the entire backend ecosystem.
+              </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-5 border border-white/10 flex items-start gap-3.5">
-              <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 shrink-0 mt-0.5">
-                <Lock className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-white mb-0.5">Top Achiever Playbook</h2>
-                <p className="text-xs text-slate-400">We benchmark and clone what the top 1% in your niche are executing.</p>
-              </div>
+            <div>
+              <span className="text-xs uppercase tracking-wider font-semibold text-slate-300 block mb-1">
+                100% Brand Ownership
+              </span>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Your audience, AdSense, community, and intellectual property remain strictly yours forever.
+              </p>
             </div>
-          </motion.div>
-
-          {/* Trust Metric Banner */}
-          <motion.div
-            variants={shouldReduceMotion ? undefined : itemVariants}
-            className="mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-slate-400 font-medium"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              Sweet Spot: 1,000 – 10,000 Views / Video
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              7-Minute VSL & Sub-60s Funnel Architecture
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              Zero Tech or Operational Burden for Creator
-            </span>
           </motion.div>
         </motion.div>
       </div>

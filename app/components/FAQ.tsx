@@ -59,10 +59,7 @@ export default function FAQ() {
     >
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
         <StaggerReveal className="max-w-[65ch] mb-12 md:mb-16">
-          <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider">
-            Clear Alignment & Terms
-          </span>
-          <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
+          <h2 className="section-heading heading-section font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance mb-5">
             Frequently Asked Questions
           </h2>
           <p className="section-heading text-section leading-[1.65] text-[var(--color-muted)]">

@@ -39,11 +39,8 @@ export default function HowItWorks() {
       <div className="container-wide py-16 md:py-24 lg:py-32 w-full">
         <div className="grid xl:grid-cols-12 gap-12 xl:gap-16">
           <StaggerReveal className="xl:col-span-5">
-            <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider">
-              The 14-Day Deployment Roadmap
-            </span>
-            <h2 className="heading-section font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-ink)] text-balance mb-5">
-              From Content Audit to Backend Cashflow in 3 Steps
+            <h2 className="heading-section font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance mb-5">
+              From Content Audit to Backend Cashflow in 14 Days
             </h2>
             <p className="text-section leading-[1.65] text-[var(--color-muted)]">
               You stay in the spotlight creating what your audience loves. We operate discreetly in the shadows engineering the conversion architecture.

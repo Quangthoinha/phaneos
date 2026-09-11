@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calculator, ArrowRight, CheckCircle2, ShieldCheck, Sparkles, TrendingUp, EyeOff } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, TrendingUp } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import StaggerReveal from "./StaggerReveal";
 
@@ -37,27 +37,17 @@ export default function CommissionCalculator() {
 
   return (
     <SectionReveal id="calculator" className="relative py-20 md:py-28 bg-[var(--color-bg)] overflow-hidden">
-      {/* Ambient background glow */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--color-primary)]/10 blur-[120px] pointer-events-none" 
-        aria-hidden="true" 
-      />
-
       <div className="container-wide relative z-10 w-full">
         <StaggerReveal className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 badge-glass mb-4 text-[var(--color-primary)]">
-            <EyeOff className="w-4 h-4" />
-            <span>Interactive Shadow Rev-Share Model</span>
-          </div>
-          <h2 className="heading-section font-bold tracking-tight text-[var(--color-ink)] mb-5">
+          <h2 className="heading-section font-bold tracking-tight text-white mb-4">
             How Much Hidden Backend Revenue Are You Leaving on the Table?
           </h2>
-          <p className="text-section text-[var(--color-muted)] leading-relaxed">
+          <p className="text-section text-slate-400 leading-relaxed">
             Most creators with 2k–10k views rely on AdSense or broken Calendly links. Plug your metrics in to see the monthly recurring revenue a Shadow Operator unlocks for you.
           </p>
         </StaggerReveal>
 
-        <div className="max-w-4xl mx-auto glass-card rounded-3xl p-6 sm:p-10 border border-white/10 relative">
+        <div className="max-w-4xl mx-auto bg-slate-900/90 rounded-3xl p-6 sm:p-10 border border-white/10 relative shadow-2xl">
           {/* Top Tag & Model Toggle */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 border-b border-white/10">
             <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Check, Sparkles, Percent, EyeOff } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Percent } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import StaggerReveal from "./StaggerReveal";
 
@@ -62,10 +62,6 @@ export default function CommissionTiers() {
       <div className="container-wide w-full">
         <div className="grid xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <StaggerReveal className="xl:col-span-4">
-            <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider flex items-center gap-1.5 w-fit">
-              <EyeOff className="w-3.5 h-3.5" />
-              <span>Partnership Models</span>
-            </span>
             <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
               Pure Win-Win Revenue Share. Zero Upfront Retainers.
             </h2>
@@ -88,10 +84,10 @@ export default function CommissionTiers() {
             {tiers.map((tier, index) => (
               <StaggerReveal key={tier.model} staggerIndex={index}>
                 <article
-                  className={`glass-card rounded-3xl p-7 md:p-8 flex flex-col h-full relative transition-all duration-300 ${
+                  className={`bg-slate-900/90 rounded-3xl p-7 md:p-8 flex flex-col h-full relative transition-all duration-300 ${
                     tier.popular
-                      ? "border-rose-500/30 bg-gradient-to-b from-rose-950/20 via-slate-900/60 to-slate-900/90 shadow-rose-950/30 shadow-2xl"
-                      : "border-white/10"
+                      ? "border border-rose-500/30 bg-gradient-to-b from-rose-950/20 via-slate-900/60 to-slate-900/90 shadow-rose-950/30 shadow-2xl"
+                      : "border border-white/10"
                   }`}
                 >
                   {tier.popular && (

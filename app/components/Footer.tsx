@@ -29,10 +29,6 @@ export default function Footer() {
       <ScrollReveal className="relative border-b border-white/10 bg-gradient-to-b from-slate-900/90 to-slate-950/90 backdrop-blur-xl">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-16 md:py-24">
           <div className="max-w-[75ch]">
-            <span className="badge-glass mb-4 text-[var(--color-primary)] font-semibold text-xs uppercase tracking-wider inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] animate-pulse" />
-              Zero Upfront Risk — 100% Aligned
-            </span>
             <h2 className="text-[clamp(2rem,3vw,3.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-balance mb-5 text-white">
               Stop Leaving £10k–£50k/mo on the Table.
             </h2>

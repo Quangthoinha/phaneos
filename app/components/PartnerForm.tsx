@@ -149,9 +149,6 @@ export default function PartnerForm() {
       <div className="container-wide w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <StaggerReveal className="max-w-[55ch]">
-            <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider">
-              Fast-Track Creator Application
-            </span>
             <h2 className="heading-section font-bold leading-[1.12] tracking-tight text-white mb-5">
               Unlock Your Backend Revenue in 14 Days
             </h2>
@@ -190,7 +187,7 @@ export default function PartnerForm() {
             <form
               id="partner-form"
               onSubmit={handleSubmit}
-              className="glass-card rounded-3xl p-7 md:p-10 border border-white/10 shadow-2xl relative"
+              className="bg-slate-900/90 rounded-3xl p-7 md:p-10 border border-white/10 shadow-2xl relative"
               aria-label="Register as a partner"
               noValidate
             >

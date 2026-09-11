@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { XCircle, CheckCircle2, AlertTriangle, Zap, EyeOff } from "lucide-react";
+import { XCircle, CheckCircle2, AlertTriangle, Zap } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import StaggerReveal from "./StaggerReveal";
 
@@ -38,19 +38,15 @@ export default function ModelComparisonMatrix() {
     <SectionReveal id="comparison" className="relative py-20 md:py-28 bg-[var(--color-bg)]">
       <div className="container-wide w-full">
         <StaggerReveal className="text-center max-w-3xl mx-auto mb-14">
-          <span className="badge-glass mb-4 text-rose-400 font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 w-fit mx-auto">
-            <EyeOff className="w-3.5 h-3.5" />
-            <span>The Shadow Operating Difference</span>
-          </span>
-          <h2 className="heading-section font-bold tracking-tight text-[var(--color-ink)] mb-5">
-            Trying to Do Everything Alone vs Partnering with a Shadow Operator
+          <h2 className="heading-section font-bold tracking-tight text-white mb-4">
+            Operating Reality: Solo vs Shadow Partnered
           </h2>
-          <p className="text-section text-[var(--color-muted)] leading-relaxed">
-            Content creators shouldn't be full-time software engineers, copywriters, and CRM admins. Here is why the top 1% of creators partner with shadow operators.
+          <p className="text-section text-slate-400 leading-relaxed">
+            Content creators shouldn't be full-time software engineers, copywriters, and CRM admins. Here is how the operating economics compare.
           </p>
         </StaggerReveal>
 
-        <div className="max-w-4xl mx-auto glass-card rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+        <div className="max-w-4xl mx-auto bg-slate-900/90 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
           {/* Table Header */}
           <div className="grid grid-cols-12 bg-slate-900/90 border-b border-white/10 p-5 md:p-6 text-sm font-semibold">
             <div className="col-span-12 md:col-span-4 text-slate-400">Operating Reality</div>
