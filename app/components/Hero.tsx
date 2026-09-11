@@ -1,7 +1,21 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { Spotlight } from "./ui/Spotlight";
+import { ShimmerButton } from "./ui/ShimmerButton";
+import { Marquee } from "./ui/Marquee";
+
+const marqueeItems = [
+  "7-Minute Qualified VSL",
+  "Zero Upfront Retainers",
+  "100% Creator IP & Audience Ownership",
+  "Stripe Connect Point-of-Sale Splits",
+  "14-Day Rapid Deployment",
+  "Sub-60s Pre-Qualification Gate",
+  "Turnkey £500 – £3,000 Digital Products",
+  "Zero AdSense or Brand Deal Interference",
+];
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -17,26 +31,38 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[90vh] flex flex-col justify-center items-center pt-32 pb-24 px-6 md:px-12 bg-slate-950 text-white"
+      className="relative min-h-[92vh] flex flex-col justify-center items-center pt-32 pb-16 px-6 md:px-12 bg-slate-950 text-white overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Understated Audience Scope Badge */}
+      {/* Aceternity UI Spotlight */}
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="#f43f5e"
+      />
+
+      {/* Subtle background grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Magic UI Announcement Pill */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-slate-800 bg-slate-900/60 text-xs font-mono tracking-wider text-slate-400 uppercase"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-white/10 bg-slate-900/80 backdrop-blur-md text-xs font-mono tracking-wider text-slate-300 uppercase shadow-lg shadow-black/20"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Partnering with creators reaching 1k – 20k views per video
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500" />
+          </span>
+          <span>Partnering with creators reaching 1k – 20k views per video</span>
         </motion.div>
 
-        {/* Master Headline: Large, confident, pure */}
+        {/* Master Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-8 text-balance"
+          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.06] mb-8 text-balance"
         >
           You make the content.{" "}
           <span className="text-slate-400 font-normal block sm:inline">
@@ -49,59 +75,51 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto mb-12 text-pretty"
+          className="text-base sm:text-lg md:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto mb-10 text-pretty"
         >
-          phaneos operates as a silent backend partner for creators and experts. We convert viewer attention into high-margin digital products and qualified client funnels on a pure revenue-share basis. No retainers. Zero upfront risk.
+          phaneos operates as a silent backend partner for select creators and experts. We convert audience attention into high-margin digital assets and pre-qualified client funnels on pure revenue share. No retainers. Zero upfront risk.
         </motion.p>
 
-        {/* Crisp, deliberate CTAs */}
+        {/* Shimmer Button & Secondary Action */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          <button
-            type="button"
+          <ShimmerButton
             onClick={() => handleScrollTo("register")}
-            className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-slate-950 hover:bg-slate-200 font-medium text-sm tracking-wide transition-all cursor-pointer flex items-center justify-center gap-2"
+            shimmerColor="#f43f5e"
+            className="w-full sm:w-auto text-sm px-8 py-4 font-semibold"
           >
             <span>Apply for Partnership</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+            <ArrowRight className="w-4 h-4 ml-1" />
+          </ShimmerButton>
 
           <button
             type="button"
-            onClick={() => handleScrollTo("thesis")}
-            className="w-full sm:w-auto px-7 py-4 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 font-medium text-sm tracking-wide transition-all cursor-pointer"
+            onClick={() => handleScrollTo("calculator")}
+            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 font-medium text-sm tracking-wide transition-all cursor-pointer flex items-center justify-center gap-2"
           >
-            How the Model Works
+            <Sparkles className="w-4 h-4 text-rose-400" />
+            <span>Calculate Your Revenue</span>
           </button>
         </motion.div>
+      </div>
 
-        {/* 3 Understated Core Metrics */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-slate-900 text-left max-w-3xl mx-auto"
-        >
-          <div>
-            <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Fee Model</div>
-            <div className="text-sm text-slate-200 font-medium">Zero Upfront Retainers</div>
-            <div className="text-xs text-slate-400 mt-1">100% aligned revenue share on new cashflow</div>
-          </div>
-          <div>
-            <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Ownership</div>
-            <div className="text-sm text-slate-200 font-medium">100% Creator IP & Audience</div>
-            <div className="text-xs text-slate-400 mt-1">Your channels, list, and brand stay strictly yours</div>
-          </div>
-          <div>
-            <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Time to Launch</div>
-            <div className="text-sm text-slate-200 font-medium">14-Day Deployment</div>
-            <div className="text-xs text-slate-400 mt-1">We build and test your backend within two weeks</div>
-          </div>
-        </motion.div>
+      {/* Magic UI Marquee Banner */}
+      <div className="w-full relative z-10 border-y border-white/5 bg-slate-950/60 backdrop-blur-md py-3">
+        <Marquee pauseOnHover className="[--duration:35s]">
+          {marqueeItems.map((item, idx) => (
+            <div
+              key={idx}
+              className="flex items-center gap-3 text-xs font-mono uppercase tracking-wider text-slate-400 px-4"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-500/80" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </Marquee>
       </div>
     </section>
   );

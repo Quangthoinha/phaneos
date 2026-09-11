@@ -7,7 +7,7 @@ import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 
 const navLinks = [
-  { href: "#thesis", label: "The Dilemma" },
+  { href: "#calculator", label: "Calculator" },
   { href: "#engines", label: "Backend Engines" },
   { href: "#model", label: "The Model" },
   { href: "#faq", label: "FAQ" },
