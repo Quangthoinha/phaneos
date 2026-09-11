@@ -7,11 +7,9 @@ import Logo from "./logo";
 import AnimatedButton from "./AnimatedButton";
 
 const navLinks = [
-  { href: "#calculator", label: "Rev-Share Calculator" },
-  { href: "#comparison", label: "The Shadow Model" },
-  { href: "#benefits", label: "Partnership Tiers" },
-  { href: "#services", label: "5 Shadow Engines" },
-  { href: "#trust", label: "Creator Protection" },
+  { href: "#thesis", label: "The Dilemma" },
+  { href: "#engines", label: "Backend Engines" },
+  { href: "#model", label: "The Model" },
   { href: "#faq", label: "FAQ" },
 ];
 

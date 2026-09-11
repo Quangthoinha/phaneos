@@ -1,12 +1,9 @@
 import SmoothScroll from "./components/SmoothScroll";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import CommissionCalculator from "./components/CommissionCalculator";
-import CommissionTiers from "./components/CommissionTiers";
-import ModelComparisonMatrix from "./components/ModelComparisonMatrix";
-import HowItWorks from "./components/HowItWorks";
-import Services from "./components/Services";
-import Trust from "./components/Trust";
+import Thesis from "./components/Thesis";
+import Engines from "./components/Engines";
+import Model from "./components/Model";
 import PartnerForm from "./components/PartnerForm";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
@@ -15,7 +12,7 @@ const faqData = [
   {
     question: "What exactly is a Shadow Operator?",
     answer:
-      "A Shadow Operator is your backstage business partner. You focus 100% of your creative energy on making high-quality content and building audience trust. In the shadows, we build your 7-minute VSL, kill naked Calendly leaks with qualification filters, package your knowledge into AI digital products, and manage the backend operations on a revenue-share basis.",
+      "A Shadow Operator is your backstage business partner. You focus 100% of your creative energy on making high-quality content and building audience trust. In the shadows, we build your 7-minute VSL, eliminate raw calendar drop-offs with qualification gates, package your expertise into digital products, and manage the backend operations on a pure revenue-share basis.",
   },
   {
     question: "Why do you operate on revenue share instead of charging upfront retainers?",
@@ -30,7 +27,7 @@ const faqData = [
   {
     question: "What size creator is the best fit for phaneos?",
     answer:
-      "Our Sweet Spot is micro-creators and experts generating between 1,000 and 10,000 views per video with a cadence hard gate: you must have posted consistently within the last 14–30 days. You have genuine viewer trust, but lack the technical time to build backend funnels.",
+      "Our sweet spot is micro-creators and experts generating between 1,000 and 20,000 views per video with a consistent publishing cadence. You have genuine viewer trust, but lack the time or technical infrastructure to build backend monetization systems.",
   },
   {
     question: "Who owns the audience, community, and intellectual property?",
@@ -40,12 +37,12 @@ const faqData = [
   {
     question: "How long does it take from agreement to first launch?",
     answer:
-      "Our rapid deployment standard is 14 days. We diagnose your niche Top Achievers, script your 7-minute VSL, build the sub-60s qualified intake funnel, and set up automated payment routing in under two weeks.",
+      "Our rapid deployment standard is 14 days. We diagnose your niche opportunities, script your 7-minute VSL, build the qualified intake funnel, and set up automated payment routing in two weeks.",
   },
   {
     question: "How do payouts and revenue splits work?",
     answer:
-      "We configure Stripe Connect or Whop to automatically split incoming customer transactions at the point of sale, ensuring 100% financial transparency. Alternatively, commissions are reconciled on a 30-day net ledger.",
+      "We configure Stripe Connect to automatically split incoming customer transactions at the point of sale, ensuring complete financial transparency and instant payouts.",
   },
 ];
 
@@ -77,12 +74,9 @@ export default function Home() {
         className="outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-inset"
       >
         <Hero />
-        <CommissionCalculator />
-        <CommissionTiers />
-        <ModelComparisonMatrix />
-        <HowItWorks />
-        <Services />
-        <Trust />
+        <Thesis />
+        <Engines />
+        <Model />
         <PartnerForm />
         <FAQ />
       </main>
