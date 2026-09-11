@@ -162,9 +162,9 @@ export default function CommissionCalculator() {
                 <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
                 Your Take-Home Monthly Cash ({model === "full" ? "50%" : "70%"} Split)
               </span>
-              <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-100 to-rose-400">
+              <div className="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tight">
                 +£{Math.round(creatorTake).toLocaleString("en-GB")}
-                <span className="text-base md:text-lg font-normal text-slate-400 ml-2">/month</span>
+                <span className="text-base md:text-lg font-normal text-rose-400 ml-2">/month</span>
               </div>
               <p className="text-xs text-slate-400 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
                 <span>• Total Unlocked Backend: <strong className="text-slate-200">£{Math.round(totalMonthlyBackend).toLocaleString("en-GB")}/mo</strong></span>

@@ -42,15 +42,15 @@ export default function Hero() {
   return (
     <SectionReveal
       id="top"
-      className="hero-section relative min-h-screen overflow-hidden bg-[var(--color-bg)] flex items-center pt-24 pb-20 bg-grid-pattern"
+      className="hero-section relative min-h-screen overflow-hidden bg-[var(--color-bg)] flex items-center pt-24 pb-20"
     >
       {/* Dynamic Ambient Background Glows */}
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-gradient-to-tr from-[var(--color-primary)]/25 via-rose-600/10 to-transparent blur-[140px] pointer-events-none"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-rose-500/10 blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none"
+        className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-slate-800/20 blur-[120px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -74,10 +74,10 @@ export default function Hero() {
           {/* Master Headline */}
           <motion.h1
             variants={shouldReduceMotion ? undefined : itemVariants}
-            className="text-[clamp(2.75rem,5.5vw,5.5rem)] font-black leading-[1.04] tracking-[-0.035em] text-white mb-8 text-balance"
+            className="text-[clamp(2.75rem,5.5vw,5.5rem)] font-black leading-[1.04] tracking-[-0.03em] text-white mb-8 text-balance"
           >
             You Make the Content.{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-200 to-amber-200">
+            <span className="text-rose-400 font-black">
               We Operate the Business in the Shadows.
             </span>
           </motion.h1>
