@@ -44,16 +44,6 @@ export default function Hero() {
       id="top"
       className="hero-section relative min-h-screen overflow-hidden bg-[var(--color-bg)] flex items-center pt-24 pb-20"
     >
-      {/* Dynamic Ambient Background Glows */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-rose-500/10 blur-[160px] pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-slate-800/20 blur-[120px] pointer-events-none"
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 container-wide mx-auto w-full">
         <motion.div
           className="max-w-4xl mx-auto text-center"
@@ -103,6 +93,63 @@ export default function Hero() {
               <PlayCircle className="w-4 h-4 text-rose-400" />
               <span>Get Free Shadow Audit</span>
             </button>
+          </motion.div>
+
+          {/* Live Conversion Architecture Comparison */}
+          <motion.div
+            variants={shouldReduceMotion ? undefined : itemVariants}
+            className="mb-14 p-5 sm:p-7 rounded-2xl bg-slate-900/90 border border-white/10 text-left max-w-3xl mx-auto shadow-2xl"
+          >
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+              <span className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                The Conversion Architecture Shift
+              </span>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                14-Day Deployment Standard
+              </span>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-rose-500/20">
+                <span className="text-rose-400 font-bold uppercase tracking-wider block mb-2">
+                  Typical Solo Creator Funnel
+                </span>
+                <ul className="space-y-2 text-slate-400">
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-500 font-bold">&times;</span>
+                    <span>Raw Linktree or naked Calendly in bio</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-500 font-bold">&times;</span>
+                    <span>40% audience drop-off due to choice overload</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-500 font-bold">&times;</span>
+                    <span>Tire-kickers flooding calendar; &lt;50% show-up</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-emerald-500/30">
+                <span className="text-emerald-400 font-bold uppercase tracking-wider block mb-2">
+                  phaneos Shadow Ecosystem
+                </span>
+                <ul className="space-y-2 text-slate-200">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&check;</span>
+                    <span>7-minute VSL explaining your unique mechanism</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&check;</span>
+                    <span>Sub-60s pre-qualification filter (91.4% show-up)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&check;</span>
+                    <span>Automated £97–£497 digital asset fulfillment</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </motion.div>
 
           {/* Executive Proof Bar */}
