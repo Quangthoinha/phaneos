@@ -58,12 +58,49 @@
 }
 
 :root {
-  --background: var(--color-bg);
-  --foreground: var(--color-ink);
-  --glass-bg: rgba(15, 23, 42, 0.65);
+  --background: #05070a;
+  --foreground: #f8fafc;
+  --color-obsidian: #05070a;
+  --color-obsidian-surface: #0a0d13;
+  --color-amber: #f59e0b;
+  --color-amber-glow: rgba(245, 158, 11, 0.15);
+  --color-crimson: #e11d48;
+  --glass-bg: rgba(10, 13, 19, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.18);
-  --specular-glow: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.12), transparent 70%);
+  --glass-border-hover: rgba(245, 158, 11, 0.3);
+}
+
+/* Confidential Dossier Styles */
+.redacted-bar {
+  background-color: #1e293b;
+  color: transparent;
+  user-select: none;
+  border-radius: 3px;
+  padding: 0 4px;
+  display: inline-block;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.redacted-bar:hover {
+  background-color: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+}
+
+.confidential-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #f59e0b;
+  color: #f59e0b;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
 }
 
 html {

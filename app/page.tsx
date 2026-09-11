@@ -1,6 +1,7 @@
 import SmoothScroll from "./components/SmoothScroll";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import CaseDossier from "./components/CaseDossier";
 import CalculatorSection from "./components/CalculatorSection";
 import EnginesBento from "./components/EnginesBento";
 import Model from "./components/Model";
@@ -71,9 +72,10 @@ export default function Home() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-inset bg-slate-950"
+        className="outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-inset bg-[#05070a]"
       >
         <Hero />
+        <CaseDossier />
         <CalculatorSection />
         <EnginesBento />
         <Model />
